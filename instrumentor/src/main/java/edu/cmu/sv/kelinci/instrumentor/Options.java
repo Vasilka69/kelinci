@@ -57,7 +57,9 @@ public class Options {
 			File file = new File(url);
 			Method method = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
 			method.setAccessible(true);
-//		    method.invoke(ClassLoader.getSystemClassLoader(), new Object[]{file.toURI().toURL()});
+			System.out.println(ClassLoader.getSystemClassLoader());
+			System.out.println(ClassLoader.getSystemClassLoader().class);
+		    method.invoke(ClassLoader.getSystemClassLoader(), new Object[]{file.toURI().toURL()});
 		} catch (Exception e) {
 			throw new RuntimeException("Error adding location to class path: " + url + "\nERR: " + e.toString());
 		}
