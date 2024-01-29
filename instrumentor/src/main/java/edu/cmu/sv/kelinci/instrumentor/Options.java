@@ -55,7 +55,7 @@ public class Options {
 	private static void addToClassPath(String url) {
 		try {
 			File file = new File(url);
-			Method method = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
+			Method method = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URLClassLoader.class});
 			method.setAccessible(true);
 		    method.invoke(ClassLoader.getSystemClassLoader(), new Object[]{file.toURI().toURL()});
 		} catch (Exception e) {
