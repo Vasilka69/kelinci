@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.net.AppClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -55,10 +56,8 @@ public class Options {
 	private static void addToClassPath(String url) {
 		try {
 			File file = new File(url);
-			Method method = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
+			Method method = AppClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
 			method.setAccessible(true);
-			System.out.println(ClassLoader.getSystemClassLoader());
-			System.out.println(ClassLoader.getSystemClassLoader().getClass());
 		    method.invoke(ClassLoader.getSystemClassLoader(), new Object[]{file.toURI().toURL()});
 		} catch (Exception e) {
 			throw new RuntimeException("Error adding location to class path: " + url + "\nERR: " + e.toString());
