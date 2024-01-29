@@ -59,7 +59,7 @@ public class Options {
 			method.setAccessible(true);
 		    method.invoke(ClassLoader.getSystemClassLoader(), new Object[]{file.toURI().toURL()});
 		} catch (Exception e) {
-			throw new RuntimeException("Error adding location to class path: " + url);
+			throw new RuntimeException("Error adding location to class path: " + url + "\nERR: " + e.toString());
 		}
 	    
 	}

@@ -7,3 +7,4 @@
 /instrumentor/.gradle
 /instrumentor/build
 instrumentor/.settings/
+**/.idea/**
