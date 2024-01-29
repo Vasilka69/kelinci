@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.net.AppClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -56,7 +55,7 @@ public class Options {
 	private static void addToClassPath(String url) {
 		try {
 			File file = new File(url);
-			Method method = AppClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
+			Method method = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
 			method.setAccessible(true);
 		    method.invoke(ClassLoader.getSystemClassLoader(), new Object[]{file.toURI().toURL()});
 		} catch (Exception e) {
