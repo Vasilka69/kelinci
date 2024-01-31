@@ -16,8 +16,6 @@ public class CSV
 //        }
 //
         System.out.println(Arrays.toString(args));
-        System.out.println("=========");
-        System.out.println(String.join("; ", args));
         System.out.println("Done.");
     }
 }
