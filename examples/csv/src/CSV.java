@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class CSV
 {
@@ -14,7 +15,9 @@ public class CSV
 //            e.printStackTrace();
 //        }
 //
-        System.out.println(args);
+        System.out.println(Arrays.toString(args));
+        System.out.println("=========");
+        System.out.println(String.join("; ", args));
         System.out.println("Done.");
     }
 }
