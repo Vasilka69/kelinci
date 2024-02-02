@@ -34,7 +34,7 @@ public class CSV
 
             List<IndividualPersonImport> persons = iterator.readAll();
 
-            System.out.printf("Imported %d person(s)", persons.size());
+            System.out.printf("Imported %d person(s)%n", persons.size());
         } catch (Exception e) {
             System.err.println("Error reading csv");
             e.printStackTrace();
