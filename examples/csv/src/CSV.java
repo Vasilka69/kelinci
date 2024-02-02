@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.MappingIterator;
@@ -12,6 +13,7 @@ public class CSV
     public static void main(final String[] args) {
 
         if (args.length != 1) {
+            System.err.println("Current args:" + Arrays.toString(args));
             System.err.println("Usage: CSV <input csv file>");
             return;
         }
