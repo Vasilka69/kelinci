@@ -46,6 +46,8 @@ public class Instrumentor {
 		
 		for (String cls : inputClasses) {
 			System.out.println("Instrumenting class: " + cls);
+			if (cls.contains("META-INF"))
+				continue;
 			InputStream bytecode = classloader.getResourceAsStream(cls);
 			
 			ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
