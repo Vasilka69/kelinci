@@ -1,47 +1,23 @@
+package src;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.util.Arrays;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.MappingIterator;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-
-public class CSV
+public class XLS
 {
     public static void main(final String[] args) {
+        System.err.println("Current args:" + Arrays.toString(args));
 
-        if (args.length != 1) {
-            System.err.println("Current args:" + Arrays.toString(args));
-            System.err.println("Usage: CSV <input csv file>");
-            return;
-        }
+        File file = new File(args[0]);
 
-        try {
-            String fileName = args[0];
-            Reader myReader = new FileReader(fileName);
-            CsvMapper mapper = new CsvMapper();
+        IndividualPersonImportServiceImpl individualPersonImportService = new IndividualPersonImportServiceImpl();
+        List<IndividualPersonImport> persons = individualPersonImportService.parseUsersFromExcel(file);
 
-            CsvSchema schema = mapper.schemaFor(IndividualPersonImport.class)
-                    .withColumnSeparator(';')
-                    .withSkipFirstDataRow(true);
-
-            MappingIterator<IndividualPersonImport> iterator = mapper
-                    .readerFor(IndividualPersonImport.class)
-                    .with(schema)
-                    .readValues(myReader);
-
-            List<IndividualPersonImport> persons = iterator.readAll();
-
-            System.out.printf("Imported %d person(s)%n", persons.size());
-        } catch (Exception e) {
-            System.err.println("Error reading csv");
-            e.printStackTrace();
-        }
-
-        System.out.println("Done.");
+        System.out.println(persons);
+        System.out.printf("Imported %d person(s).%n", persons.size());
     }
 
     static class IndividualPersonImport {
