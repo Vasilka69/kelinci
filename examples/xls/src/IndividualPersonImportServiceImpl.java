@@ -14,6 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -407,6 +408,10 @@ public class IndividualPersonImportServiceImpl /*implements IndividualPersonImpo
         return false;
     }
 
+    public static boolean isEmpty(Collection<?> collection) {
+        return (collection == null || collection.isEmpty());
+    }
+
     public List<IndividualPersonImport> parseUsersFromExcel(File file) throws IOException, InvalidFormatException {
 //        validateFile(file);
         List<IndividualPersonImport> result = new ArrayList<>();
@@ -437,7 +442,7 @@ public class IndividualPersonImportServiceImpl /*implements IndividualPersonImpo
                     temp.setPassword(getCellValue(row, 6, true));
                     // ROLES
                     List<String> roleIds = getCellValues(row, 7);
-                    if (!CollectionUtils.isEmpty(roleIds)) {
+                    if (!isEmpty(roleIds)) {
                         temp.setRolesIds(roleIds);
                     }
                 } catch (Exception ex) {
