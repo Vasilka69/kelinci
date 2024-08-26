@@ -1,10 +1,10 @@
 {
-  "id": "id_190",
-  "name": "name_170",
-  "multiple": false,
-  "attributeType": "STRING",
+  "id": "attributes._246",
+  "name": "name_233",
+  "multiple": true,
+  "attributeType": "BOOLEAN",
   "isGlobal": true,
-  "order": 167,
-  "dictionaryAttributeId": 414,
-  "dictionaryAttributeName": "dictionaryAttributeName_360"
+  "order": 406,
+  "dictionaryAttributeId": 169,
+  "dictionaryAttributeName": "dictionaryAttributeName_264"
 }

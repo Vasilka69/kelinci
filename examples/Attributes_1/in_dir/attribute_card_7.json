@@ -1,10 +1,10 @@
 {
-  "id": "id_269",
-  "name": "name_388",
-  "multiple": true,
-  "attributeType": "DOUBLE",
+  "id": "attributes._245",
+  "name": "name_366",
+  "multiple": false,
+  "attributeType": "DICTIONARY",
   "isGlobal": false,
-  "order": 369,
-  "dictionaryAttributeId": 366,
-  "dictionaryAttributeName": "dictionaryAttributeName_78"
+  "order": 12,
+  "dictionaryAttributeId": 488,
+  "dictionaryAttributeName": "dictionaryAttributeName_24"
 }
