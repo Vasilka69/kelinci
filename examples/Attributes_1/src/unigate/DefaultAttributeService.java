@@ -105,7 +105,7 @@ public class DefaultAttributeService implements AttributeService {
     @Override
     public Attribute add(Attribute attribute) {
         Attribute validatedAttribute = validateBeforeAdd(attribute);
-        System.out.println(validatedAttribute + "сохранён в БД");
+        System.out.println(validatedAttribute + " сохранён в БД");
         return validatedAttribute;
 //        return attributeRepository.save(validateBeforeAdd(attribute));
     }
