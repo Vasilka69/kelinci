@@ -26,7 +26,7 @@ public class AttributesMain
 
             System.out.printf("Added attribute card with id = %s.%n", response.getId());
         } catch (Exception e) {
-            System.err.println("Error reading xls: ");
+            System.err.println("Error: ");
             e.printStackTrace();
         }
 
