@@ -58,7 +58,7 @@ public class DefaultAttributeService implements AttributeService {
     }
 
     public static boolean hasText(String str) {
-        return (str != null && !str.isBlank());
+        return (str != null && !str.isEmpty());
     }
 
     private void validateAttributeTypeBoolean(Attribute attribute) {
