@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-public class Attributes
+public class AttributesMain
 {
     public static void main(final String[] args) {
         System.err.println("Current args:" + Arrays.toString(args));
