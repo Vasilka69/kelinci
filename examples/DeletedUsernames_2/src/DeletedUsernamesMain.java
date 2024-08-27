@@ -16,13 +16,13 @@ public class DeletedUsernamesMain
         String path = args[0];
 
         try {
-            AttributeMapperDto attributeMapperDto = new AttributeMapperDto();
-            AttributeService attributeService = new DefaultAttributeService();
-            AttributeController attributeController = new AttributeController(attributeMapperDto, attributeService);
+            DeletedUsernameRepository deletedUsernameRepository = new DeletedUsernameRepository();
+            UserRepository userRepository = new UserRepository();
+            DeletedUsernameController deletedUsernameController = new DeletedUsernameController(deletedUsernameRepository, userRepository);
 
-            AttributeInfo attributeInfo = parseJson(path, AttributeInfo.class);
+            DeletedUsernameInfo deletedUsernameInfo = parseJson(path, DeletedUsernameInfo.class);
 
-            IdResponse<String> response = attributeController.addAttributeCard(attributeInfo);
+            IdResponse<String> response = deletedUsernameController.createCard(deletedUsernameInfo);
 
             System.out.printf("Added deleted username with id = %s.%n", response.getId());
         } catch (Exception e) {
