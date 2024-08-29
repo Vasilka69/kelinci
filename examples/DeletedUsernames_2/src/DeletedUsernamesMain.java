@@ -1,6 +1,7 @@
 package src;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import src.unigate.*;
 
 import java.nio.charset.StandardCharsets;
@@ -37,7 +38,9 @@ public class DeletedUsernamesMain
         try {
             byte[] encoded = Files.readAllBytes(Paths.get(jsonPath));
             String json = new String(encoded, StandardCharsets.UTF_8);
-            return new ObjectMapper().readValue(json, type);
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            return objectMapper.readValue(json, type);
         } catch (RuntimeException e) {
             throw new Exception(e);
         }
