@@ -1,0 +1,36 @@
+{
+  "id": 38,
+  "name": "name_103",
+  "urlPattern": "urlPattern_392",
+  "requestParams": [
+    {
+      "id": 285,
+      "paramName": "paramName_452",
+      "paramValue": "paramValue_173"
+    },
+    {
+      "id": 154,
+      "paramName": "paramName_167",
+      "paramValue": "paramValue_50"
+    },
+    {
+      "id": 24,
+      "paramName": "paramName_123",
+      "paramValue": "paramValue_43"
+    }
+  ],
+  "httpMethod": "PUT",
+  "condition": "condition_386",
+  "appendHeaders": [
+    {
+      "id": 233,
+      "name": "name_307",
+      "expression": "expression_371"
+    },
+    {
+      "id": 41,
+      "name": "name_64",
+      "expression": "expression_28"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": 324,
+  "name": "name_278",
+  "urlPattern": "urlPattern_197",
+  "requestParams": [
+    {
+      "id": 294,
+      "paramName": "paramName_191",
+      "paramValue": "paramValue_424"
+    }
+  ],
+  "httpMethod": "TRACE",
+  "condition": "condition_413",
+  "appendHeaders": [
+    {
+      "id": 277,
+      "name": "name_145",
+      "expression": "expression_408"
+    },
+    {
+      "id": 411,
+      "name": "name_430",
+      "expression": "expression_86"
+    },
+    {
+      "id": 54,
+      "name": "name_292",
+      "expression": "expression_297"
+    },
+    {
+      "id": 65,
+      "name": "name_485",
+      "expression": "expression_300"
+    },
+    {
+      "id": 343,
+      "name": "name_485",
+      "expression": "expression_458"
+    }
+  ]
+}

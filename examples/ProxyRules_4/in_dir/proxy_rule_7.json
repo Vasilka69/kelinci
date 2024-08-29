@@ -1,0 +1,21 @@
+{
+  "id": 127,
+  "name": "name_264",
+  "urlPattern": "urlPattern_142",
+  "requestParams": [
+    {
+      "id": 155,
+      "paramName": "paramName_225",
+      "paramValue": "paramValue_106"
+    }
+  ],
+  "httpMethod": "PUT",
+  "condition": "condition_292",
+  "appendHeaders": [
+    {
+      "id": 206,
+      "name": "name_157",
+      "expression": "expression_292"
+    }
+  ]
+}

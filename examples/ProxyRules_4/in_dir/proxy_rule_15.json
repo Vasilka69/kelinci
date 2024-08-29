@@ -1,0 +1,31 @@
+{
+  "id": 367,
+  "name": "name_237",
+  "urlPattern": "urlPattern_311",
+  "requestParams": [
+    {
+      "id": 447,
+      "paramName": "paramName_492",
+      "paramValue": "paramValue_265"
+    }
+  ],
+  "httpMethod": "OPTIONS",
+  "condition": "condition_237",
+  "appendHeaders": [
+    {
+      "id": 453,
+      "name": "name_342",
+      "expression": "expression_344"
+    },
+    {
+      "id": 109,
+      "name": "name_129",
+      "expression": "expression_111"
+    },
+    {
+      "id": 434,
+      "name": "name_424",
+      "expression": "expression_205"
+    }
+  ]
+}

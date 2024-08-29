@@ -1,0 +1,25 @@
+{
+  "id": 71,
+  "name": "name_244",
+  "urlPattern": "urlPattern_208",
+  "requestParams": [
+    {
+      "id": 391,
+      "paramName": "paramName_187",
+      "paramValue": "paramValue_271"
+    },
+    {
+      "id": 399,
+      "paramName": "paramName_420",
+      "paramValue": "paramValue_12"
+    },
+    {
+      "id": 346,
+      "paramName": "paramName_450",
+      "paramValue": "paramValue_404"
+    }
+  ],
+  "httpMethod": "HEAD",
+  "condition": "condition_140",
+  "appendHeaders": []
+}

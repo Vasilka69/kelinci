@@ -1,0 +1,25 @@
+{
+  "id": 434,
+  "name": "name_335",
+  "urlPattern": "urlPattern_298",
+  "requestParams": [],
+  "httpMethod": "PUT",
+  "condition": "condition_13",
+  "appendHeaders": [
+    {
+      "id": 466,
+      "name": "name_243",
+      "expression": "expression_31"
+    },
+    {
+      "id": 310,
+      "name": "name_70",
+      "expression": "expression_268"
+    },
+    {
+      "id": 236,
+      "name": "name_115",
+      "expression": "expression_138"
+    }
+  ]
+}

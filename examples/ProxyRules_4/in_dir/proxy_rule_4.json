@@ -1,0 +1,25 @@
+{
+  "id": 179,
+  "name": "name_112",
+  "urlPattern": "urlPattern_407",
+  "requestParams": [
+    {
+      "id": 264,
+      "paramName": "paramName_283",
+      "paramValue": "paramValue_29"
+    },
+    {
+      "id": 350,
+      "paramName": "paramName_374",
+      "paramValue": "paramValue_457"
+    },
+    {
+      "id": 451,
+      "paramName": "paramName_307",
+      "paramValue": "paramValue_245"
+    }
+  ],
+  "httpMethod": "GET",
+  "condition": "condition_185",
+  "appendHeaders": []
+}

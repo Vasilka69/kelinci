@@ -1,0 +1,30 @@
+{
+  "id": 393,
+  "name": "name_336",
+  "urlPattern": "urlPattern_330",
+  "requestParams": [
+    {
+      "id": 332,
+      "paramName": "paramName_101",
+      "paramValue": "paramValue_396"
+    },
+    {
+      "id": 124,
+      "paramName": "paramName_263",
+      "paramValue": "paramValue_358"
+    },
+    {
+      "id": 359,
+      "paramName": "paramName_143",
+      "paramValue": "paramValue_357"
+    },
+    {
+      "id": 390,
+      "paramName": "paramName_478",
+      "paramValue": "paramValue_11"
+    }
+  ],
+  "httpMethod": "POST",
+  "condition": "condition_322",
+  "appendHeaders": []
+}
