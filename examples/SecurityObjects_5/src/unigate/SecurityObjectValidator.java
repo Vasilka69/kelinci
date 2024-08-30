@@ -45,7 +45,7 @@ public class SecurityObjectValidator {
 
     private void validateSecurityObjectParent(final SecurityObject securityObject) {
         if (securityObject.getParentId() != null) {
-            if (!securityObjectRepository.existsById(securityObject.getParentId())) {
+            if (!securityObjectRepository.existsByParentId(securityObject.getParentId())) {
                 throw new RuntimeException("Не найден объект безопасности, в котором содержится редактируемый объект безопасности!");
             }
 

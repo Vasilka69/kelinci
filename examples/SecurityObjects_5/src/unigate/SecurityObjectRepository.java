@@ -5,6 +5,10 @@ import java.util.List;
 
 public class SecurityObjectRepository {
     public boolean existsById(String id) {
+        return false;
+    }
+
+    public boolean existsByParentId(String parentId) {
         return true;
     }
 
