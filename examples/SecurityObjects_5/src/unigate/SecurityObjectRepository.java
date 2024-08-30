@@ -1,5 +1,6 @@
 package src.unigate;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class SecurityObjectRepository {
     }
 
     public List<String> findAllDescendantIdsByParentId(String id) {
-        return Collections.emptyList();
+        return new ArrayList<>();
     }
 
     public List<String> findIdByParentIdAndName(String s, String name) {
