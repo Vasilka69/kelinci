@@ -1,31 +1,46 @@
 {
-  "id": 367,
-  "name": "name_237",
-  "urlPattern": "urlPattern_311",
+  "id": 232,
+  "name": "name_338",
+  "urlPattern": "urlPattern_105",
   "requestParams": [
     {
-      "id": 447,
-      "paramName": "paramName_492",
-      "paramValue": "paramValue_265"
+      "id": 322,
+      "paramName": "paramName_191",
+      "paramValue": "paramValue_113"
+    },
+    {
+      "id": 351,
+      "paramName": "paramName_113",
+      "paramValue": "paramValue_5"
+    },
+    {
+      "id": 270,
+      "paramName": "paramName_45",
+      "paramValue": "paramValue_295"
     }
   ],
   "httpMethod": "OPTIONS",
-  "condition": "condition_237",
+  "condition": "getUserId() != null",
   "appendHeaders": [
     {
-      "id": 453,
-      "name": "name_342",
-      "expression": "expression_344"
+      "id": 321,
+      "name": "name_152",
+      "expression": "getUserId() != null"
     },
     {
-      "id": 109,
-      "name": "name_129",
-      "expression": "expression_111"
+      "id": 60,
+      "name": "name_20",
+      "expression": "getUserId() != null"
     },
     {
-      "id": 434,
-      "name": "name_424",
-      "expression": "expression_205"
+      "id": 184,
+      "name": "name_327",
+      "expression": "getUserId() != null"
+    },
+    {
+      "id": 2,
+      "name": "name_496",
+      "expression": "getUserId() != null"
     }
   ]
 }

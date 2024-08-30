@@ -1,21 +1,31 @@
 {
-  "id": 127,
-  "name": "name_264",
-  "urlPattern": "urlPattern_142",
+  "id": 187,
+  "name": "name_286",
+  "urlPattern": "urlPattern_193",
   "requestParams": [
     {
-      "id": 155,
-      "paramName": "paramName_225",
-      "paramValue": "paramValue_106"
+      "id": 135,
+      "paramName": "paramName_413",
+      "paramValue": "paramValue_461"
+    },
+    {
+      "id": 270,
+      "paramName": "paramName_127",
+      "paramValue": "paramValue_81"
     }
   ],
   "httpMethod": "PUT",
-  "condition": "condition_292",
+  "condition": "getUserId() != null",
   "appendHeaders": [
     {
-      "id": 206,
-      "name": "name_157",
-      "expression": "expression_292"
+      "id": 290,
+      "name": "name_288",
+      "expression": "getUserId() != null"
+    },
+    {
+      "id": 369,
+      "name": "name_284",
+      "expression": "getUserId() != null"
     }
   ]
 }

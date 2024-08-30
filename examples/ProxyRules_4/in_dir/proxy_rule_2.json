@@ -1,41 +1,31 @@
 {
-  "id": 324,
-  "name": "name_278",
-  "urlPattern": "urlPattern_197",
+  "id": 240,
+  "name": "name_227",
+  "urlPattern": "urlPattern_59",
   "requestParams": [
     {
-      "id": 294,
-      "paramName": "paramName_191",
-      "paramValue": "paramValue_424"
+      "id": 407,
+      "paramName": "paramName_185",
+      "paramValue": "paramValue_290"
     }
   ],
-  "httpMethod": "TRACE",
-  "condition": "condition_413",
+  "httpMethod": "OPTIONS",
+  "condition": "getUserId() != null",
   "appendHeaders": [
     {
-      "id": 277,
-      "name": "name_145",
-      "expression": "expression_408"
+      "id": 125,
+      "name": "name_179",
+      "expression": "getUserId() != null"
     },
     {
-      "id": 411,
-      "name": "name_430",
-      "expression": "expression_86"
+      "id": 37,
+      "name": "name_57",
+      "expression": "getUserId() != null"
     },
     {
-      "id": 54,
-      "name": "name_292",
-      "expression": "expression_297"
-    },
-    {
-      "id": 65,
-      "name": "name_485",
-      "expression": "expression_300"
-    },
-    {
-      "id": 343,
-      "name": "name_485",
-      "expression": "expression_458"
+      "id": 253,
+      "name": "name_315",
+      "expression": "getUserId() != null"
     }
   ]
 }
