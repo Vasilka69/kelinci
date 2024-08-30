@@ -1,0 +1,15 @@
+{
+  "id": "id_486",
+  "name": "name_369",
+  "deleteDate": "2019-03-05T21:47:46+03:00[Asia/Aden]",
+  "securityObjectType": {
+    "id": "id_86",
+    "name": "name_423",
+    "description": "description_81",
+    "actions": []
+  },
+  "parent": {
+    "id": "id_369",
+    "name": "name_495"
+  }
+}

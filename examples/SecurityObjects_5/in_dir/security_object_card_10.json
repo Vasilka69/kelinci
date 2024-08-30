@@ -1,0 +1,51 @@
+{
+  "id": "id_275",
+  "name": "name_27",
+  "deleteDate": "2023-12-14T15:54:36+03:00[Asia/Kuwait]",
+  "securityObjectType": {
+    "id": "id_482",
+    "name": "name_383",
+    "description": "description_99",
+    "lastModified": "2022-04-25T00:13:45-04:00[America/Guyana]",
+    "actions": [
+      {
+        "id": "id_381",
+        "name": "name_314",
+        "description": "description_302",
+        "deleteDate": "2023-05-14T02:14:10-07:00[PST8PDT]",
+        "lastModified": "2021-01-14T02:51:44+12:00[Pacific/Wake]"
+      },
+      {
+        "id": "id_243",
+        "name": "name_365",
+        "description": "description_251",
+        "deleteDate": "2024-06-24T08:53:05-04:00[America/Martinique]",
+        "lastModified": "2024-10-12T22:52:59+06:30[Asia/Yangon]"
+      },
+      {
+        "id": "id_465",
+        "name": "name_256",
+        "description": "description_361",
+        "deleteDate": "2019-12-03T13:42:13+02:00[Asia/Hebron]"
+      },
+      {
+        "id": "id_382",
+        "name": "name_449",
+        "description": "description_38",
+        "deleteDate": "2020-01-06T06:40:59+12:00[Pacific/Kwajalein]",
+        "lastModified": "2020-01-07T04:00:01+14:00[Pacific/Kiritimati]"
+      },
+      {
+        "id": "id_184",
+        "name": "name_276",
+        "description": "description_446",
+        "deleteDate": "2019-07-07T18:06:31+04:30[Iran]",
+        "lastModified": "2019-11-03T07:09:26-07:00[America/Creston]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_400",
+    "name": "name_378"
+  }
+}

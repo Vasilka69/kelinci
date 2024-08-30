@@ -1,0 +1,53 @@
+{
+  "id": "id_480",
+  "name": "name_39",
+  "deleteDate": "2020-12-24T17:33:41Z[Africa/Dakar]",
+  "securityObjectType": {
+    "id": "id_488",
+    "name": "name_415",
+    "description": "description_219",
+    "deleteDate": "2020-09-15T03:56:36Z[UTC]",
+    "lastModified": "2024-08-16T05:30:18+12:00[Pacific/Wallis]",
+    "actions": [
+      {
+        "id": "id_5",
+        "name": "name_438",
+        "description": "description_498"
+      },
+      {
+        "id": "id_113",
+        "name": "name_340",
+        "description": "description_179",
+        "deleteDate": "2020-04-25T17:14:28-11:00[Pacific/Samoa]"
+      },
+      {
+        "id": "id_359",
+        "name": "name_348",
+        "description": "description_291",
+        "lastModified": "2019-12-28T01:52:45+02:00[Europe/Kaliningrad]"
+      },
+      {
+        "id": "id_133",
+        "name": "name_427",
+        "description": "description_181"
+      },
+      {
+        "id": "id_316",
+        "name": "name_471",
+        "description": "description_285",
+        "deleteDate": "2024-06-12T00:00:22+02:00[Africa/Kigali]"
+      },
+      {
+        "id": "id_428",
+        "name": "name_96",
+        "description": "description_153",
+        "deleteDate": "2022-04-29T22:24:17Z[Iceland]",
+        "lastModified": "2024-04-18T14:57:57-04:00[America/New_York]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_362",
+    "name": "name_101"
+  }
+}

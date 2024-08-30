@@ -1,0 +1,36 @@
+{
+  "id": "id_356",
+  "name": "name_420",
+  "deleteDate": "2019-02-18T17:07:31+01:00[Africa/Casablanca]",
+  "securityObjectType": {
+    "id": "id_444",
+    "name": "name_94",
+    "description": "description_141",
+    "deleteDate": "2020-08-05T03:52:33-05:00[America/Menominee]",
+    "actions": [
+      {
+        "id": "id_192",
+        "name": "name_37",
+        "description": "description_131",
+        "deleteDate": "2024-02-26T23:29:59-03:00[America/Santiago]"
+      },
+      {
+        "id": "id_351",
+        "name": "name_465",
+        "description": "description_369",
+        "deleteDate": "2025-03-14T07:04:35+03:00[Africa/Djibouti]",
+        "lastModified": "2020-10-24T21:03:52+10:00[Asia/Vladivostok]"
+      },
+      {
+        "id": "id_368",
+        "name": "name_366",
+        "description": "description_241",
+        "deleteDate": "2019-07-31T03:47:10-04:00[SystemV/AST4]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_479",
+    "name": "name_240"
+  }
+}

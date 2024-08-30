@@ -1,0 +1,29 @@
+{
+  "id": "id_293",
+  "name": "name_491",
+  "deleteDate": "2022-09-19T08:39:40+02:00[Antarctica/Troll]",
+  "securityObjectType": {
+    "id": "id_325",
+    "name": "name_319",
+    "description": "description_481",
+    "deleteDate": "2023-05-20T20:27:42+01:00[Europe/Lisbon]",
+    "actions": [
+      {
+        "id": "id_397",
+        "name": "name_265",
+        "description": "description_429",
+        "deleteDate": "2019-12-10T18:08:24-05:00[America/Cancun]"
+      },
+      {
+        "id": "id_446",
+        "name": "name_493",
+        "description": "description_468",
+        "deleteDate": "2025-05-23T19:22:29-06:00[SystemV/CST6]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_441",
+    "name": "name_258"
+  }
+}

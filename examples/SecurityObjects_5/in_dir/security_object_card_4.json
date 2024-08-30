@@ -1,0 +1,28 @@
+{
+  "id": "id_173",
+  "name": "name_125",
+  "deleteDate": "2025-02-13T06:43:46-07:00[America/Edmonton]",
+  "securityObjectType": {
+    "id": "id_169",
+    "name": "name_447",
+    "description": "description_235",
+    "actions": [
+      {
+        "id": "id_132",
+        "name": "name_397",
+        "description": "description_399",
+        "deleteDate": "2023-01-02T03:01:57-05:00[America/Eirunepe]"
+      },
+      {
+        "id": "id_208",
+        "name": "name_291",
+        "description": "description_378",
+        "lastModified": "2020-04-25T14:33:57+02:00[Africa/Tripoli]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_278",
+    "name": "name_495"
+  }
+}

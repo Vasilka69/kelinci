@@ -1,0 +1,44 @@
+{
+  "id": "id_327",
+  "name": "name_390",
+  "deleteDate": "2025-01-07T05:00:12Z[Atlantic/Reykjavik]",
+  "securityObjectType": {
+    "id": "id_341",
+    "name": "name_169",
+    "description": "description_161",
+    "actions": [
+      {
+        "id": "id_27",
+        "name": "name_392",
+        "description": "description_338",
+        "deleteDate": "2023-08-15T11:13:41+13:00[Pacific/Fakaofo]"
+      },
+      {
+        "id": "id_36",
+        "name": "name_14",
+        "description": "description_244"
+      },
+      {
+        "id": "id_187",
+        "name": "name_100",
+        "description": "description_282"
+      },
+      {
+        "id": "id_175",
+        "name": "name_163",
+        "description": "description_122",
+        "deleteDate": "2019-08-03T03:22:39+12:00[Antarctica/South_Pole]"
+      },
+      {
+        "id": "id_140",
+        "name": "name_166",
+        "description": "description_316",
+        "lastModified": "2025-06-06T05:10:48-04:00[America/Antigua]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_490",
+    "name": "name_494"
+  }
+}

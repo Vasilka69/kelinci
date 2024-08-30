@@ -1,0 +1,34 @@
+{
+  "id": "id_334",
+  "name": "name_438",
+  "deleteDate": "2022-10-13T01:03:41-03:00[Chile/Continental]",
+  "securityObjectType": {
+    "id": "id_369",
+    "name": "name_215",
+    "description": "description_316",
+    "deleteDate": "2024-07-19T10:49:17+02:00[Poland]",
+    "actions": [
+      {
+        "id": "id_81",
+        "name": "name_36",
+        "description": "description_85"
+      },
+      {
+        "id": "id_167",
+        "name": "name_495",
+        "description": "description_103",
+        "lastModified": "2020-10-27T12:44:34+01:00[Europe/Warsaw]"
+      },
+      {
+        "id": "id_241",
+        "name": "name_75",
+        "description": "description_24",
+        "lastModified": "2021-02-06T07:12:23+02:00[Europe/Mariehamn]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_144",
+    "name": "name_10"
+  }
+}

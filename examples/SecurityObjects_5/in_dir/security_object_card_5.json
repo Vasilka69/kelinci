@@ -1,0 +1,29 @@
+{
+  "id": "id_142",
+  "name": "name_445",
+  "deleteDate": "2019-07-16T18:14:14+01:00[Africa/Douala]",
+  "securityObjectType": {
+    "id": "id_477",
+    "name": "name_403",
+    "description": "description_248",
+    "lastModified": "2021-04-06T10:12:29+02:00[Europe/Andorra]",
+    "actions": [
+      {
+        "id": "id_457",
+        "name": "name_33",
+        "description": "description_148"
+      },
+      {
+        "id": "id_410",
+        "name": "name_327",
+        "description": "description_481",
+        "deleteDate": "2019-04-29T08:16:03+10:30[Australia/Lord_Howe]",
+        "lastModified": "2020-11-01T18:36:21+08:00[Asia/Macao]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_210",
+    "name": "name_217"
+  }
+}

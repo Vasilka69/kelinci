@@ -1,0 +1,35 @@
+{
+  "id": "id_93",
+  "name": "name_330",
+  "deleteDate": "2023-07-29T16:27:00-05:00[Brazil/Acre]",
+  "securityObjectType": {
+    "id": "id_216",
+    "name": "name_112",
+    "description": "description_123",
+    "actions": [
+      {
+        "id": "id_383",
+        "name": "name_295",
+        "description": "description_417",
+        "deleteDate": "2024-05-14T09:51:10-02:30[America/St_Johns]",
+        "lastModified": "2021-07-24T13:05:10-05:00[America/Monterrey]"
+      },
+      {
+        "id": "id_45",
+        "name": "name_291",
+        "description": "description_69",
+        "deleteDate": "2019-06-20T08:00:05+07:00[Asia/Phnom_Penh]"
+      },
+      {
+        "id": "id_52",
+        "name": "name_425",
+        "description": "description_167",
+        "lastModified": "2021-03-05T18:43:48+03:00[Africa/Nairobi]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_316",
+    "name": "name_389"
+  }
+}

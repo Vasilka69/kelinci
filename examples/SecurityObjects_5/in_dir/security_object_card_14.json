@@ -1,0 +1,64 @@
+{
+  "id": "id_239",
+  "name": "name_294",
+  "deleteDate": "2020-01-31T02:30:02-04:00[America/Dominica]",
+  "securityObjectType": {
+    "id": "id_27",
+    "name": "name_224",
+    "description": "description_389",
+    "lastModified": "2023-12-07T16:02:16+05:30[Asia/Kolkata]",
+    "actions": [
+      {
+        "id": "id_224",
+        "name": "name_273",
+        "description": "description_375"
+      },
+      {
+        "id": "id_412",
+        "name": "name_361",
+        "description": "description_93",
+        "deleteDate": "2022-05-13T16:07:17+06:00[Asia/Qostanay]",
+        "lastModified": "2021-03-15T23:48:10+03:00[Africa/Asmara]"
+      },
+      {
+        "id": "id_188",
+        "name": "name_385",
+        "description": "description_22",
+        "lastModified": "2020-05-23T23:29:54Z[Zulu]"
+      },
+      {
+        "id": "id_253",
+        "name": "name_185",
+        "description": "description_177"
+      },
+      {
+        "id": "id_245",
+        "name": "name_300",
+        "description": "description_128",
+        "lastModified": "2022-10-23T16:04:06+04:00[Indian/Reunion]"
+      },
+      {
+        "id": "id_152",
+        "name": "name_22",
+        "description": "description_149",
+        "deleteDate": "2022-01-30T12:09:13+11:00[Australia/Victoria]"
+      },
+      {
+        "id": "id_390",
+        "name": "name_1",
+        "description": "description_168"
+      },
+      {
+        "id": "id_131",
+        "name": "name_19",
+        "description": "description_368",
+        "deleteDate": "2021-11-17T05:00:49-02:00[Etc/GMT+2]",
+        "lastModified": "2025-03-13T05:31:31-06:00[America/Inuvik]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_418",
+    "name": "name_259"
+  }
+}

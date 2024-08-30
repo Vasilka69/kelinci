@@ -1,0 +1,23 @@
+{
+  "id": "id_166",
+  "name": "name_127",
+  "deleteDate": "2022-04-25T12:13:09-03:00[America/Punta_Arenas]",
+  "securityObjectType": {
+    "id": "id_126",
+    "name": "name_442",
+    "description": "description_338",
+    "lastModified": "2025-02-23T15:15:35Z[Europe/Dublin]",
+    "actions": [
+      {
+        "id": "id_194",
+        "name": "name_243",
+        "description": "description_343",
+        "deleteDate": "2022-10-24T18:25:25-06:00[America/Boise]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_15",
+    "name": "name_465"
+  }
+}

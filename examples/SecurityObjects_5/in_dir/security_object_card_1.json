@@ -1,0 +1,24 @@
+{
+  "id": "id_448",
+  "name": "name_19",
+  "deleteDate": "2019-11-16T21:58:55-08:00[America/Whitehorse]",
+  "securityObjectType": {
+    "id": "id_142",
+    "name": "name_26",
+    "description": "description_357",
+    "deleteDate": "2020-01-28T11:25:37+11:00[Asia/Srednekolymsk]",
+    "lastModified": "2022-01-24T12:21:01+09:00[Asia/Jayapura]",
+    "actions": [
+      {
+        "id": "id_490",
+        "name": "name_499",
+        "description": "description_498",
+        "deleteDate": "2023-03-03T02:05:05-03:00[America/Argentina/Rio_Gallegos]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_310",
+    "name": "name_191"
+  }
+}

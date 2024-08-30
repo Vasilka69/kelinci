@@ -1,0 +1,22 @@
+{
+  "id": "id_253",
+  "name": "name_428",
+  "deleteDate": "2019-07-02T11:16:14+02:00[Europe/Gibraltar]",
+  "securityObjectType": {
+    "id": "id_326",
+    "name": "name_423",
+    "description": "description_80",
+    "deleteDate": "2023-08-21T17:49:33+03:00[Indian/Antananarivo]",
+    "actions": [
+      {
+        "id": "id_311",
+        "name": "name_377",
+        "description": "description_368"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_217",
+    "name": "name_237"
+  }
+}

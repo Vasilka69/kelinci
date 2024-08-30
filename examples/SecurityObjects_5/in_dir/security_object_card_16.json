@@ -1,0 +1,38 @@
+{
+  "id": "id_257",
+  "name": "name_197",
+  "deleteDate": "2023-03-10T04:32:16-05:00[America/Havana]",
+  "securityObjectType": {
+    "id": "id_431",
+    "name": "name_388",
+    "description": "description_415",
+    "deleteDate": "2025-04-08T20:17:47+07:00[Antarctica/Davis]",
+    "lastModified": "2020-01-21T19:58:14-07:00[US/Arizona]",
+    "actions": [
+      {
+        "id": "id_356",
+        "name": "name_349",
+        "description": "description_237",
+        "lastModified": "2023-11-22T17:06:25-07:00[America/Dawson]"
+      },
+      {
+        "id": "id_61",
+        "name": "name_346",
+        "description": "description_475",
+        "deleteDate": "2022-01-10T09:04:11-04:00[America/Antigua]",
+        "lastModified": "2022-10-19T07:30:37-04:00[America/Iqaluit]"
+      },
+      {
+        "id": "id_117",
+        "name": "name_272",
+        "description": "description_77",
+        "deleteDate": "2021-03-24T19:35:29-03:00[Etc/GMT+3]",
+        "lastModified": "2023-01-22T12:51:12+02:00[Europe/Zaporozhye]"
+      }
+    ]
+  },
+  "parent": {
+    "id": "id_351",
+    "name": "name_491"
+  }
+}
