@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class SecurityObjectTypeRepository {
     public boolean existsById(String id) {
-        return false;
+        return true;
     }
 
     public Optional<SecurityObjectType> findById(String id) {
