@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SecurityObjectRepository {
     public boolean existsById(String id) {
-        return false;
+        return true;
     }
 
     public List<String> findAllDescendantIdsByParentId(String id) {
