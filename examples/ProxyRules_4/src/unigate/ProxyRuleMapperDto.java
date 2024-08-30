@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class ProxyRuleMapperDto {
 
     public ProxyRule mapProxyRule(ProxyRuleInfo proxyRuleInfo){
-        var proxyRule = new ProxyRule();
+        ProxyRule proxyRule = new ProxyRule();
         proxyRule.setId(proxyRuleInfo.getId());
         proxyRule.setName(StringUtils.trim(proxyRuleInfo.getName()));
         proxyRule.setUrlPattern(StringUtils.trim(proxyRuleInfo.getUrlPattern()));
