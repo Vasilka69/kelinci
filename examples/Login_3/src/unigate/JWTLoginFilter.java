@@ -1,11 +1,11 @@
 package ru.kamatech.unigate.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.LockedException;
@@ -15,20 +15,7 @@ import org.springframework.security.jackson2.CoreJackson2Module;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.CollectionUtils;
-import ru.kamatech.unigate.common.config.EsiaServiceProperties;
-import ru.kamatech.unigate.common.constant.WebConstants;
-import ru.kamatech.unigate.common.exception.UnigateAuthenticationException;
-import ru.kamatech.unigate.common.service.HttpClient;
-import ru.kamatech.unigate.common.utils.RedirectUrlUtils;
-import ru.kamatech.unigate.security.core.SecurityUser;
-import ru.kamatech.unigate.security.jwt.strategy.impl.RegularAuthenticationStrategyImpl;
-import ru.kamatech.unigate.security.model.User;
-import ru.kamatech.unigate.security.model.settings.SettingAccessControl;
-import ru.kamatech.unigate.security.service.settings.SettingsAccessControlService;
-import ru.kamatech.unigate.security.service.settings.SettingsPasswordService;
-import ru.kamatech.unigate.security.utils.SecurityUtils;
-import ru.kamatech.unigate.security.utils.UserUtils;
-import ru.kamatech.unigate.common.security.UnigateAuthenticationToken;
+import src.unigate.*;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +29,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     private final AuthenticationService authenticationService;
     private final SettingsPasswordService settingsPasswordService;
     private final SettingsAccessControlService settingsAccessControlService;
-    private final EsiaServiceProperties esiaServiceProperties;
+//    private final EsiaServiceProperties esiaServiceProperties;
     private final String[] allowRedirectUrls;
 
     public JWTLoginFilter(String url,
@@ -50,14 +37,14 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                           AuthenticationService authenticationService,
                           SettingsPasswordService settingsPasswordService,
                           SettingsAccessControlService settingsAccessControlService,
-                          EsiaServiceProperties esiaServiceProperties,
+//                          EsiaServiceProperties esiaServiceProperties,
                           String[] allowRedirectUrls) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);
         this.authenticationService = authenticationService;
         this.settingsPasswordService = settingsPasswordService;
         this.settingsAccessControlService = settingsAccessControlService;
-        this.esiaServiceProperties = esiaServiceProperties;
+//        this.esiaServiceProperties = esiaServiceProperties;
         this.allowRedirectUrls = allowRedirectUrls;
     }
 
@@ -70,8 +57,9 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                 RegularAuthenticationStrategyImpl authenticationStrategy = new RegularAuthenticationStrategyImpl();
                 return getAuthenticationManager().authenticate(authenticationStrategy.authenticate(request, allowRedirectUrls));
             }
-            url = String.format("%s/%s?%s", esiaServiceProperties.getUrl(), url, request.getQueryString());
-            ResponseEntity<String> authenticationToken = HttpClient.sendGetRequest(url, String.class);
+//            url = String.format("%s/%s?%s", esiaServiceProperties.getUrl(), url, request.getQueryString());
+//            ResponseEntity<String> authenticationToken = HttpClient.sendGetRequest(url, String.class);
+            ResponseEntity<String> authenticationToken = new ResponseEntity<>("TEST_TOKEN", HttpStatus.OK);
 
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new CoreJackson2Module());
