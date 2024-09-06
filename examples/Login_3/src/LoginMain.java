@@ -1,12 +1,19 @@
 package src;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.catalina.connector.Request;
 import src.unigate.*;
 
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.security.Principal;
+import java.util.*;
 
 public class LoginMain
 {
@@ -16,15 +23,22 @@ public class LoginMain
         String path = args[0];
 
         try {
-            AttributeMapperDto attributeMapperDto = new AttributeMapperDto();
-            AttributeService attributeService = new DefaultAttributeService();
-            AttributeController attributeController = new AttributeController(attributeMapperDto, attributeService);
+            
 
-            AttributeInfo attributeInfo = parseJson(path, AttributeInfo.class);
+            JWTLoginFilter jwtLoginFilter = new JWTLoginFilter();
 
-            IdResponse<String> response = attributeController.addAttributeCard(attributeInfo);
+            SystemCredentials systemCredentials = parseJson(path, SystemCredentials.class);
 
-            // todo System.out.printf("Added attribute card with id = %s.%n", response.getId());
+            ServletRequest request = new ;
+            // HeaderWriterRequest
+            ServletResponse response = null;
+            // HeaderWriterResponse
+            FilterChain chain = null;
+            // VirtualFilterChain
+
+            jwtLoginFilter.doFilter(request, response, chain);
+
+            System.out.printf("User with username = %s, password = %s was logged in%n", systemCredentials.getUsername(), systemCredentials.getPassword());
         } catch (Exception e) {
             System.err.println("Error: ");
             e.printStackTrace();
