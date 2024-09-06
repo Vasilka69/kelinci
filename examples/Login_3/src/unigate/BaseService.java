@@ -35,14 +35,14 @@ public interface BaseService<T extends Entity<K>, K extends Serializable> {
 //     * @return Список сущностей
 //     */
 //    List<T> findAll();
-//
-//    /**
-//     * Получение сущности по идентификатору
-//     * @param key идентификатор сущности
-//     * @return Сущность
-//     */
-//    T findByKey(K key);
-//
+
+    /**
+     * Получение сущности по идентификатору
+     * @param key идентификатор сущности
+     * @return Сущность
+     */
+    T findByKey(K key);
+
 //    /**
 //     * Проверка наличия сущности в хранилище
 //     *

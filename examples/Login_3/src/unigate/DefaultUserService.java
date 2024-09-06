@@ -5,9 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Primary
 @Service
-@Slf4j
+//@Slf4j
 @RequiredArgsConstructor
 public class DefaultUserService implements UserService {
 
@@ -18,8 +22,8 @@ public class DefaultUserService implements UserService {
 //    private final UsersLastPasswordRepository usersLastPasswordRepository;
 //    private final IndividualPersonRepository individualPersonRepository;
 //    private final SessionRepository sessionRepository;
-//    private final RoleService roleService;
-//    private final SecurityObjectService securityObjectService;
+    private final RoleService roleService;
+    private final SecurityObjectService securityObjectService;
 //    private final ActionRepository actionRepository;
 //    private final UserValidator userValidator;
 //    private final AttributeValueService attributeValueService;
@@ -136,7 +140,12 @@ public class DefaultUserService implements UserService {
 //        log.debug("Информация о пользователе ({}) получена", userId);
 //        return user;
 //    }
-//
+
+    @Override
+    public User findByKey(String key) {
+        throw new RuntimeException("Метод не используется");
+    }
+
 //    @Override
 //    public boolean exists(String key) {
 //        log.debug("Проверка наличия пользователя ({})", key);
@@ -587,65 +596,76 @@ public class DefaultUserService implements UserService {
 //        return user;
 //    }
 //
-//    @Override
-//    public Map<String, Set<String>> getPermissions(User user) {
+    @Override
+    public Map<String, Set<String>> getPermissions(User user) {
 //        log.debug("Получение привилегий пользователя ({})", user.getId());
-//        Map<String, Set<String>> permissions = new HashMap<>();
-//
-//        Stream.concat(
-//                user.getRoles().stream()
-//                        .map(this::loadRole)
-//                        .filter(Objects::nonNull)
-//                        .filter(role -> role.getDeleteDate() == null)
-//                        .map(Role::getPermissions)
-//                        .flatMap(List::stream),
-//                user.getPermissions().stream()
-//                        .filter(permission -> !permission.getProhibitive() && permission.isTemporaryPermissionActive())
-//        ).forEach(permission -> {
-//            String securityObjectId = permission.getId().getSecurityObjectId();
-//            permissions.computeIfAbsent(securityObjectId, key -> new HashSet<>());
-//            permissions.get(securityObjectId).add(permission.getId().getAction());
-//        });
-//
-//        List<GroupPermissionEntity> permissionsFromGroups
+        System.out.printf("Получение привилегий пользователя (%s)", user.getId());
+        Map<String, Set<String>> permissions = new HashMap<>();
+
+        Stream.concat(
+                user.getRoles().stream()
+                        .map(this::loadRole)
+                        .filter(Objects::nonNull)
+                        .filter(role -> role.getDeleteDate() == null)
+                        .map(Role::getPermissions)
+                        .flatMap(List::stream),
+                user.getPermissions().stream()
+                        .filter(permission -> !permission.getProhibitive() && permission.isTemporaryPermissionActive())
+        ).forEach(permission -> {
+            String securityObjectId = permission.getId().getSecurityObjectId();
+            permissions.computeIfAbsent(securityObjectId, key -> new HashSet<>());
+            permissions.get(securityObjectId).add(permission.getId().getAction());
+        });
+
+        List<GroupPermissionEntity> permissionsFromGroups
 //                = groupsJdbcRepository.getPermissionsByUserGroups(user.getId());
-//
-//        permissionsFromGroups.forEach(p -> {
-//            permissions.computeIfAbsent(p.getSecurityObjectId(), key -> new HashSet<>());
-//            permissions.get(p.getSecurityObjectId()).add(p.getActionId());
-//        });
-//
-//        user.getPermissions().stream()
-//                .filter(UserPermission::getProhibitive)
-//                .filter(permission -> permissions.containsKey(permission.getId().getSecurityObjectId()))
-//                .forEach(permission -> permissions.get(permission.getId().getSecurityObjectId()).remove(permission.getId().getAction()));
-//
-//        securityObjectService.findAnnulledIdByIds(permissions.keySet()).forEach(permissions::remove);
-//
-//        Set<String> actionIds = permissions.values().stream()
-//                .flatMap(Set::stream)
-//                .collect(Collectors.toSet());
-//
-//        if (!actionIds.isEmpty()) {
+                = getPermissionsByUserGroups(user.getId());
+
+        permissionsFromGroups.forEach(p -> {
+            permissions.computeIfAbsent(p.getSecurityObjectId(), key -> new HashSet<>());
+            permissions.get(p.getSecurityObjectId()).add(p.getActionId());
+        });
+
+        user.getPermissions().stream()
+                .filter(UserPermission::getProhibitive)
+                .filter(permission -> permissions.containsKey(permission.getId().getSecurityObjectId()))
+                .forEach(permission -> permissions.get(permission.getId().getSecurityObjectId()).remove(permission.getId().getAction()));
+
+        securityObjectService.findAnnulledIdByIds(permissions.keySet()).forEach(permissions::remove);
+
+        Set<String> actionIds = permissions.values().stream()
+                .flatMap(Set::stream)
+                .collect(Collectors.toSet());
+
+        if (!actionIds.isEmpty()) {
 //            Set<String> annulledActions = actionRepository.findAnnulledIdByIds(actionIds);
-//            permissions.values().forEach(actions -> actions.removeAll(annulledActions));
-//        }
-//
-//        Set<String> emptySecObj = permissions.entrySet().stream()
-//                .filter(e -> e.getValue().isEmpty())
-//                .map(Map.Entry::getKey)
-//                .collect(Collectors.toSet());
-//
-//        emptySecObj.forEach(permissions::remove);
-//
-//        return permissions;
-//    }
-//
-//    @Override
-//    public boolean hasPermission(User user, String resource, String action) {
-//        return getPermissions(user).getOrDefault(resource, Collections.emptySet()).contains(action);
-//    }
-//
+            Set<String> annulledActions = mockRepositoryFindAnnulledIdByIds(actionIds);
+            permissions.values().forEach(actions -> actions.removeAll(annulledActions));
+        }
+
+        Set<String> emptySecObj = permissions.entrySet().stream()
+                .filter(e -> e.getValue().isEmpty())
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
+
+        emptySecObj.forEach(permissions::remove);
+
+        return permissions;
+    }
+
+    private Set<String> mockRepositoryFindAnnulledIdByIds(Set<String> actionIds) {
+        return actionIds;
+    }
+
+    private List<GroupPermissionEntity> getPermissionsByUserGroups(String id) {
+        return Arrays.asList(new GroupPermissionEntity("securityObjectId", "actionId"));
+    }
+
+    @Override
+    public boolean hasPermission(User user, String resource, String action) {
+        return getPermissions(user).getOrDefault(resource, Collections.emptySet()).contains(action);
+    }
+
 //    @Override
 //    public String generateCn(User user) {
 //        return UUID.randomUUID().toString();
@@ -711,16 +731,17 @@ public class DefaultUserService implements UserService {
 //
 //        });
 //    }
-//
-//    private Role loadRole(String roleId) {
-//        try {
-//            return roleService.findByKey(roleId);
-//        } catch (ResourceIllegalArgumentException | ResourceNotFoundException e) {
+
+    private Role loadRole(String roleId) {
+        try {
+            return roleService.findByKey(roleId);
+        } catch (RuntimeException e) {
 //            log.warn("Ошибка при прогрузке роли ({})", roleId);
-//            return null;
-//        }
-//    }
-//
+            System.out.printf("Ошибка при прогрузке роли (%s)", roleId);
+            return null;
+        }
+    }
+
     @Override
     public String getProtocolObjectType() {
         return OBJECT_TYPE;

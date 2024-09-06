@@ -7,7 +7,7 @@ public interface SettingsAccessControlService extends SettingsService<SettingAcc
 
 //    SettingAccessControl getInterruptingTime();
 //
-//    SettingAccessControl getUserSessionMaxCount();
+    SettingAccessControl getUserSessionMaxCount();
 
     SettingAccessControl getTwoFactorAuth();
 

@@ -28,10 +28,10 @@ public class SettingsAccessControlServiceImpl extends AbstractSettingsService<Se
 //        return get("interrupting_time");
 //    }
 //
-//    @Override
-//    public SettingAccessControl getUserSessionMaxCount() {
-//        return get("user_session_max_count");
-//    }
+    @Override
+    public SettingAccessControl getUserSessionMaxCount() {
+        return get("user_session_max_count");
+    }
 
     @Override
     public SettingAccessControl getTwoFactorAuth() {
@@ -153,12 +153,7 @@ public class SettingsAccessControlServiceImpl extends AbstractSettingsService<Se
 
             @Override
             public Optional<SettingAccessControl> findById(String s) {
-                return Optional.of(new SettingAccessControl(
-                        "two_factor_auth",
-                        null,
-                        true,
-                        99999
-                ));
+                return findAll().stream().filter(it -> it.getId().equals(s)).findFirst();
             }
 
             @Override

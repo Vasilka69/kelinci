@@ -4,6 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+
+import java.time.ZonedDateTime;
+import java.util.*;
+
+import static org.springframework.util.StringUtils.hasText;
 
 @Primary
 @Service
@@ -81,25 +87,63 @@ public class DefaultRoleService implements RoleService {
 //        log.debug("Список ролей получен");
 //        return roles;
 //    }
-//
-//    @Override
-//    public Role findByKey(String key) {
+
+    @Override
+    public Role findByKey(String key) {
 //        log.trace("Получение информации о роли ({})", key);
-//        Role role;
-//        try {
-//            if (!hasText(key)) {
-//                throw new ResourceEmptyIdException(ResourceName.ROLE);
-//            }
+        System.out.printf("Получение информации о роли (%s)", key);
+        Role role;
+        try {
+            if (!hasText(key)) {
+                throw new RuntimeException(ResourceName.ROLE);
+            }
 //            role = roleRepository.findById(key)
-//                    .orElseThrow(() -> new ResourceNotFoundException(ResourceName.ROLE, key));
-//        } catch (ResourceIllegalArgumentException | ResourceNotFoundException exception) {
+            role = findById(key)
+                    .orElseThrow(() -> new RuntimeException(String.format("%s с ключом %s не найден", ResourceName.ROLE, key)));
+        } catch (RuntimeException exception) {
 //            log.error(exception.toString());
-//            throw exception;
-//        }
+            System.out.printf(exception.toString());
+            throw exception;
+        }
 //        log.trace("Информация о роли ({}) получена", key);
-//        return role;
-//    }
-//
+        System.out.printf("Информация о роли (%s) получена", key);
+        return role;
+    }
+
+    private Optional<Role> findById(String key) {
+        Optional<Role> result = Optional.empty();
+        if (new Random().nextBoolean()) {
+            Role role = new Role(
+                    "id",
+                    "name",
+                    "description",
+                    false,
+                    ZonedDateTime.now(),
+                    new HashSet<>(Arrays.asList("type 1", "type 2")),
+                    new ArrayList<>(),
+                    99999,
+                    ZonedDateTime.now()
+            );
+            role.setPermissions(Arrays.asList(
+                    new RolePermission(
+                            role,
+                            "securityObjectId",
+                            "action",
+                            false
+                    ),
+                    new RolePermission(
+                            role,
+                            "securityObjectId 2",
+                            "action 2",
+                            false
+                    )
+            ));
+
+            result = Optional.of(role);
+        }
+        return result;
+    }
+
 //    @Override
 //    public List<Role> findByKeys(Collection<String> keys) {
 //        log.debug("Получение информации о ролях ({})", keys);

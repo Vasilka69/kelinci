@@ -128,6 +128,14 @@ public class SettingsPasswordServiceImpl extends AbstractSettingsService<Setting
                                 99999,
                                 99999,
                                 "99999"
+                        ),
+                        new SettingPassword(
+                                "user_session_max_count",
+                                null,
+                                false,
+                                99999,
+                                99999,
+                                "99999"
                         )
                 );
             }
@@ -214,16 +222,7 @@ public class SettingsPasswordServiceImpl extends AbstractSettingsService<Setting
 
             @Override
             public Optional<SettingPassword> findById(String s) {
-                return Optional.of(
-                        new SettingPassword(
-                                "max_time",
-                                null,
-                                false,
-                                99999,
-                                99999,
-                                "99999"
-                        )
-                );
+                return findAll().stream().filter(it -> it.getId().equals(s)).findFirst();
             }
 
             @Override

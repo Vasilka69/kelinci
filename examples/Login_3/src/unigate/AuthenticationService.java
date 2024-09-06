@@ -3,13 +3,6 @@ package src.unigate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import ru.kamatech.unigate.security.dto.MenuItemInfo;
-import ru.kamatech.unigate.security.repository.AuthenticationStrategyRepository;
-import ru.kamatech.unigate.security.service.ChangePasswordService;
-import ru.kamatech.unigate.security.service.MenuService;
-import ru.kamatech.unigate.security.service.SessionService;
-import ru.kamatech.unigate.security.service.TwoFactorAuthService;
-import ru.kamatech.unigate.security.service.impl.SecurityUserDetailsManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,15 +18,15 @@ public class AuthenticationService {
     private static final String CHANGE_PASS_HEADER = "ChangePassword";
     public static final String TWO_FACTOR_AUTH_HEADER = "TwoFactorAuth";
 
-    private SecurityUserDetailsManager securityUserDetailsManager;
+//    private SecurityUserDetailsManager securityUserDetailsManager;
     private SessionService sessionService;
     private MessageService messageService;
     private ChangePasswordService changePasswordService;
     private TwoFactorAuthService twoFactorAuthService;
-    private AuthenticationStrategyRepository authenticationStrategyRepository;
+//    private AuthenticationStrategyRepository authenticationStrategyRepository;
     private EsiaServiceProperties esiaServiceProperties;
     private MenuService menuService;
-
+//
 //    @Autowired
 //    public void setUserDetailsManager(
 //            SecurityUserDetailsManager securityUserDetailsManager,

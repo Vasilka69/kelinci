@@ -1,5 +1,8 @@
 package src.unigate;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Сервис пользователей
  */
@@ -57,14 +60,14 @@ public interface UserService extends BaseProtocolableService<User, String> {
 //     * @param userId идентификатор пользователя
 //     */
 //    void clearPermissions(String userId);
-//
-//    /**
-//     * Привилегии пользователя: привязанные напрямую и входящие в роли.
-//     * @param user пользователь
-//     * @return набор привилегий пользователя
-//     */
-//    Map<String, Set<String>> getPermissions(User user);
-//
+
+    /**
+     * Привилегии пользователя: привязанные напрямую и входящие в роли.
+     * @param user пользователь
+     * @return набор привилегий пользователя
+     */
+    Map<String, Set<String>> getPermissions(User user);
+
 //    /**
 //     * Обновление карточки пользователя
 //     *
@@ -74,9 +77,9 @@ public interface UserService extends BaseProtocolableService<User, String> {
 //    User update(User user);
 //
 //    User updateSysUserCard(SysUser sysUser);
-//
-//    boolean hasPermission(User user, String resource, String action);
-//
+
+    boolean hasPermission(User user, String resource, String action);
+
 //    String generateCn(User user);
 //
 //    Boolean lockUnlockUser(String userId, String lockComment);

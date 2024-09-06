@@ -3,8 +3,8 @@ package src.unigate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import ru.kamatech.unigate.security.service.mail.MailService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class UserMailServiceImpl implements UserMailService {
     private final TwoFactorAuthCodeService twoFactorAuthCodeService;
     private final MailService mailService;
-//    private final TemplateEngine templateEngine;
+    private final TemplateEngine templateEngine;
 
     @Override
     public void sendTwoFactorCode(User user) {
