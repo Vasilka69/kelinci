@@ -3,20 +3,9 @@ package src.unigate;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.kamatech.unigate.common.exception.ResourceIllegalArgumentException;
-import ru.kamatech.unigate.security.model.IndividualPerson;
-import ru.kamatech.unigate.security.model.SysUser;
-import ru.kamatech.unigate.security.model.settings.SettingPassword;
-import ru.kamatech.unigate.security.repository.UsersLastPasswordRepository;
-import ru.kamatech.unigate.security.service.settings.SettingsPasswordService;
 
-import java.security.SecureRandom;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -41,7 +30,7 @@ public class UserUtils {
 
     public static String getName(User user) {
         if (user != null) {
-            user = HibernateUtils.initializeAndUnproxy(user);
+//            user = HibernateUtils.initializeAndUnproxy(user);
             if (user instanceof IndividualPerson) {
                 return getIndividualUserName((IndividualPerson) user);
             }
@@ -312,22 +301,22 @@ public class UserUtils {
 //        return passwordMinDate;
 //    }
 //
-//    public static ZonedDateTime getPasswordMaxDate(SettingPassword passwordMaxTime, ZonedDateTime date) {
-//        var passwordMaxDate = date;
-//        if (!isEnableSettingWithTime(passwordMaxTime)) {
-//            return passwordMaxDate;
-//        }
-//
-//        var time = passwordMaxTime.getTime().split(":"); // 00:00:00
-//        if (time.length == 3) {
-//            passwordMaxDate = passwordMaxDate.plusDays(Long.parseLong(time[0]));
-//            passwordMaxDate = passwordMaxDate.plusHours(Long.parseLong(time[1]));
-//            passwordMaxDate = passwordMaxDate.plusMinutes(Long.parseLong(time[2]));
-//        } else {
-//            log.error("Недопустимый формат для `Максимальный срок действия`");
-//        }
-//        return passwordMaxDate;
-//    }
+    public static ZonedDateTime getPasswordMaxDate(SettingPassword passwordMaxTime, ZonedDateTime date) {
+        ZonedDateTime passwordMaxDate = date;
+        if (!isEnableSettingWithTime(passwordMaxTime)) {
+            return passwordMaxDate;
+        }
+
+        String[] time = passwordMaxTime.getTime().split(":"); // 00:00:00
+        if (time.length == 3) {
+            passwordMaxDate = passwordMaxDate.plusDays(Long.parseLong(time[0]));
+            passwordMaxDate = passwordMaxDate.plusHours(Long.parseLong(time[1]));
+            passwordMaxDate = passwordMaxDate.plusMinutes(Long.parseLong(time[2]));
+        } else {
+            log.error("Недопустимый формат для `Максимальный срок действия`");
+        }
+        return passwordMaxDate;
+    }
 //
 //    public static int getPasswordMaxDateInDays(SettingPassword passwordMaxTime) {
 //        var hours = 0;
@@ -348,9 +337,9 @@ public class UserUtils {
 //        return settingPassword != null && settingPassword.isEnable();
 //    }
 //
-//    private static boolean isEnableSettingWithTime(SettingPassword settingPassword) {
-//        return settingPassword != null && settingPassword.isEnable() && settingPassword.getTime() != null;
-//    }
+    private static boolean isEnableSettingWithTime(SettingPassword settingPassword) {
+        return settingPassword != null && settingPassword.isEnable() && settingPassword.getTime() != null;
+    }
 //
 //    private static boolean isEnableSettingWithValue(SettingPassword settingPassword) {
 //        return settingPassword != null && settingPassword.isEnable() && settingPassword.getValue() != null;

@@ -1,24 +1,9 @@
 package src.unigate;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import src.unigate.*;
-import ru.kamatech.unigate.common.config.EsiaServiceProperties;
-import ru.kamatech.unigate.common.constant.WebConstants;
-import ru.kamatech.unigate.common.models.security.AuthenticationSystem;
-import ru.kamatech.unigate.common.models.security.SessionInfo;
-import ru.kamatech.unigate.common.service.HttpClient;
-import ru.kamatech.unigate.common.service.MessageService;
-import ru.kamatech.unigate.common.utils.ServletUtils;
-import ru.kamatech.unigate.common.utils.TokenUtils;
 import ru.kamatech.unigate.security.dto.MenuItemInfo;
-import ru.kamatech.unigate.security.model.AuthenticationStrategy;
 import ru.kamatech.unigate.security.repository.AuthenticationStrategyRepository;
 import ru.kamatech.unigate.security.service.ChangePasswordService;
 import ru.kamatech.unigate.security.service.MenuService;
@@ -26,8 +11,9 @@ import ru.kamatech.unigate.security.service.SessionService;
 import ru.kamatech.unigate.security.service.TwoFactorAuthService;
 import ru.kamatech.unigate.security.service.impl.SecurityUserDetailsManager;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Optional;
 
 import static org.springframework.http.HttpHeaders.LOCATION;
@@ -94,7 +80,7 @@ public class AuthenticationService {
             HttpServletRequest request, HttpServletResponse response, User user, String redirectUri
     ) throws IOException {
         String remoteIp = getRemoteIp(request);
-        AuthenticationSystem authenticationSystem = ru.kamatech.unigate.security.jwt.JWTLoginFilter.isEsiaAuthenticationStrategy(request)
+        AuthenticationSystem authenticationSystem = JWTLoginFilter.isEsiaAuthenticationStrategy(request)
                 ? AuthenticationSystem.ESIA
                 : AuthenticationSystem.UNIGATE;
         String[] links = getUserMenuLinks(user);
@@ -109,12 +95,12 @@ public class AuthenticationService {
         ServletUtils.setToken(response, token);
         log.info("Пользователь {} авторизовался", user.getUsername());
 
-        String redirectUrl = ru.kamatech.unigate.security.jwt.JWTLoginFilter.getRedirectUrl(request, user, redirectUri, links, token, esiaServiceProperties.getUrl());
+        String redirectUrl = JWTLoginFilter.getRedirectUrl(request, user, redirectUri, links, token, esiaServiceProperties.getUrl());
 
         if (StringUtils.isNotEmpty(redirectUrl)) {
-            if (ru.kamatech.unigate.security.jwt.JWTLoginFilter.isEsiaAuthenticationStrategy(request)) {
+            if (JWTLoginFilter.isEsiaAuthenticationStrategy(request)) {
                 response.sendRedirect(redirectUrl);
-            } else if (ru.kamatech.unigate.security.jwt.JWTLoginFilter.isRegularAuthenticationStrategy(request)) {
+            } else if (JWTLoginFilter.isRegularAuthenticationStrategy(request)) {
                 response.addHeader(LOCATION, redirectUrl);
             }
         }
@@ -123,7 +109,7 @@ public class AuthenticationService {
     }
 
     public String addAuthenticationByUser(
-            HttpServletRequest request, ru.kamatech.unigate.security.model.User user,
+            HttpServletRequest request, User user,
             boolean writeLog, String remoteIp, AuthenticationSystem authenticationSystem
     ) {
         String token = TokenUtils.generateAuthorizationToken(user.getUsername());
@@ -212,11 +198,19 @@ public class AuthenticationService {
     public String getAuthenticationStrategyUrl(HttpServletRequest request) {
         String strategyId = request.getParameter(WebConstants.STRATEGY_PARAMETER);
         if (strategyId!=null){
-            Optional<AuthenticationStrategy> strategy = authenticationStrategyRepository.findById(strategyId);
+            Optional<AuthenticationStrategy> strategy = findAuthenticationStrategyById(strategyId);
             if (strategy.isPresent()){
                 return strategy.get().getRedirectUrl();
             }
         }
         return null;
+    }
+
+    private Optional<AuthenticationStrategy> findAuthenticationStrategyById(String strategyId) {
+        return Optional.of(new AuthenticationStrategy(
+                strategyId,
+            "description",
+            "redirectUrl"
+        ));
     }
 }

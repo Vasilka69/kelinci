@@ -1,4 +1,4 @@
-package ru.kamatech.unigate.security.jwt;
+package src.unigate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.ArrayUtils;
@@ -29,7 +29,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     private final AuthenticationService authenticationService;
     private final SettingsPasswordService settingsPasswordService;
     private final SettingsAccessControlService settingsAccessControlService;
-//    private final EsiaServiceProperties esiaServiceProperties;
+//    private final EsiaServiceProperties esiaServiceProperties = new EsiaServiceProperties("http://10.80.37.15:8081");
     private final String[] allowRedirectUrls;
 
     public JWTLoginFilter(String url,
@@ -68,17 +68,17 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
             return getAuthenticationManager().authenticate(token);
         } catch (Exception e) {
-            if (isEsiaAuthenticationStrategy(request)) {
-                String redirectUri = RedirectUrlUtils.getRedirectUri(request);
-                String errorCode = getErrorCode(e);
-                String getErrorRedirectUrl = String.format("%s/auth/esia/url/error/%s?%s=%s", esiaServiceProperties.getUrl(),
-                        errorCode, WebConstants.REDIRECT_URI_PARAMETER, redirectUri);
-                String url = HttpClient.sendGetRequest(getErrorRedirectUrl, String.class).getBody();
-                response.sendRedirect(url);
-                return null;
-            } else {
+//            if (isEsiaAuthenticationStrategy(request)) {
+//                String redirectUri = RedirectUrlUtils.getRedirectUri(request);
+//                String errorCode = getErrorCode(e);
+//                String getErrorRedirectUrl = String.format("%s/auth/esia/url/error/%s?%s=%s", esiaServiceProperties.getUrl(),
+//                        errorCode, WebConstants.REDIRECT_URI_PARAMETER, redirectUri);
+//                String url = HttpClient.sendGetRequest(getErrorRedirectUrl, String.class).getBody();
+//                response.sendRedirect(url);
+//                return null;
+//            } else {
                 throw e;
-            }
+//            }
         }
     }
 
@@ -91,7 +91,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     public void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth) throws IOException {
         UnigateAuthenticationToken unigateAuth = (UnigateAuthenticationToken)auth;
-        SecurityUser user = ((SecurityUser) auth.getPrincipal()).getUserData();
+        User user = ((SecurityUser) auth.getPrincipal()).getUserData();
 
         if (isAddChangePassword(request, user)) {
             addChangePasswordToken(request, response, user);
@@ -136,7 +136,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             if (passwordMaxTime.getTime() != null) {
                 passwordExpired = ZonedDateTime.now().isAfter(UserUtils.getPasswordMaxDate(passwordMaxTime, user.getChangePasswordDate()));
             } else {
-                log.error("Максимальный срок действия пароля не указан!");
+                System.err.println("Максимальный срок действия пароля не указан!");
             }
         }
 
@@ -183,41 +183,41 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, token);
         HttpEntity entity = new HttpEntity<>(headers);
-        if (isEsiaAuthenticationStrategy(request)) {
-            String getRolesUrl = String.format("%s/auth/esia/roles", esiaUrl);
-            List roles = HttpClient
-                    .sendGetRequest(entity, getRolesUrl, List.class)
-                    .getBody();
-            if (!CollectionUtils.isEmpty(roles)) {
-                String getRolesRedirectUrl = String.format("%s/auth/esia/url/roles?%s=%s&%s=%s",
-                        esiaUrl, WebConstants.REDIRECT_URI_PARAMETER, redirectUri, WebConstants.TOKEN_PARAMETER, token);
-                url = HttpClient
-                        .sendGetRequest(entity, getRolesRedirectUrl, String.class)
-                        .getBody();
-                return url;
-            } else if (StringUtils.isNotEmpty(redirectUri)) {
-                String getSuccessRedirectUrl = String.format("%s/auth/esia/url/success?%s=%s&%s=%s",
-                        esiaUrl, WebConstants.REDIRECT_URI_PARAMETER, redirectUri, WebConstants.TOKEN_PARAMETER, token);
-                url = HttpClient
-                        .sendGetRequest(entity, getSuccessRedirectUrl, String.class)
-                        .getBody();
-                return url;
-            } else if (!ArrayUtils.isEmpty(allowRedirectUrls) && allowRedirectUrls.length == 1) {
-                String getSuccessRedirectUrl = String.format("%s/auth/esia/url/success?%s=%s&%s=%s",
-                        esiaUrl, WebConstants.REDIRECT_URI_PARAMETER, allowRedirectUrls[0], WebConstants.TOKEN_PARAMETER, token);
-                url = HttpClient
-                        .sendGetRequest(entity, getSuccessRedirectUrl, String.class)
-                        .getBody();
-                return url;
-            }
-
-        } else if (isRegularAuthenticationStrategy(request)) {
+//        if (isEsiaAuthenticationStrategy(request)) {
+//            String getRolesUrl = String.format("%s/auth/esia/roles", esiaUrl);
+//            List roles = HttpClient
+//                    .sendGetRequest(entity, getRolesUrl, List.class)
+//                    .getBody();
+//            if (!CollectionUtils.isEmpty(roles)) {
+//                String getRolesRedirectUrl = String.format("%s/auth/esia/url/roles?%s=%s&%s=%s",
+//                        esiaUrl, WebConstants.REDIRECT_URI_PARAMETER, redirectUri, WebConstants.TOKEN_PARAMETER, token);
+//                url = HttpClient
+//                        .sendGetRequest(entity, getRolesRedirectUrl, String.class)
+//                        .getBody();
+//                return url;
+//            } else if (StringUtils.isNotEmpty(redirectUri)) {
+//                String getSuccessRedirectUrl = String.format("%s/auth/esia/url/success?%s=%s&%s=%s",
+//                        esiaUrl, WebConstants.REDIRECT_URI_PARAMETER, redirectUri, WebConstants.TOKEN_PARAMETER, token);
+//                url = HttpClient
+//                        .sendGetRequest(entity, getSuccessRedirectUrl, String.class)
+//                        .getBody();
+//                return url;
+//            } else if (!ArrayUtils.isEmpty(allowRedirectUrls) && allowRedirectUrls.length == 1) {
+//                String getSuccessRedirectUrl = String.format("%s/auth/esia/url/success?%s=%s&%s=%s",
+//                        esiaUrl, WebConstants.REDIRECT_URI_PARAMETER, allowRedirectUrls[0], WebConstants.TOKEN_PARAMETER, token);
+//                url = HttpClient
+//                        .sendGetRequest(entity, getSuccessRedirectUrl, String.class)
+//                        .getBody();
+//                return url;
+//            }
+//
+//        } else if (isRegularAuthenticationStrategy(request)) {
             if (StringUtils.isNotEmpty(redirectUri)) {
                 return redirectUri;
             } else if (SecurityUtils.isGeneralUser(user) && !ArrayUtils.isEmpty(allowRedirectUrls) && allowRedirectUrls.length == 1) {
                 return allowRedirectUrls[0];
             }
-        }
+//        }
 
         return null;
     }
