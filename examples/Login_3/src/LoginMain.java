@@ -1,23 +1,22 @@
 package src;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.catalina.connector.Request;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.ProviderManager;
 import org.thymeleaf.TemplateEngine;
 import src.unigate.*;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.BufferedReader;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.Principal;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class LoginMain
 {
@@ -72,7 +71,8 @@ public class LoginMain
                     menuService
             );
 
-            String[] allowRedirectUrls = new String[0];
+            final String redirectUrl = "/test_redirect";
+            String[] allowRedirectUrls = new String[] {redirectUrl};
 
             UnigateAuthenticationProvider unigateAuthenticationProvider = new UnigateAuthenticationProvider(
                     usersLocker,
@@ -104,7 +104,9 @@ public class LoginMain
             // HeaderWriterRequest
             ServletResponse response = null;
             // HeaderWriterResponse
-            FilterChain chain = null;
+            FilterChain chain = (request1, response1) -> {
+
+            };
             // VirtualFilterChain
 
             jwtLoginFilter.doFilter(request, response, chain);
