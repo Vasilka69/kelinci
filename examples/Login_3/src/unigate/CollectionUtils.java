@@ -10,7 +10,7 @@ import java.util.Collection;
 /**
  * Утилиты для работы с коллекциями
  */
-@Slf4j
+//@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CollectionUtils {
 

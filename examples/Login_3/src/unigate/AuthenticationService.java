@@ -14,7 +14,7 @@ import static org.springframework.http.HttpHeaders.LOCATION;
 import static src.unigate.ProtocolEventType.LOGIN_EVENT;
 
 @Service
-@Slf4j
+//@Slf4j
 @AllArgsConstructor
 public class AuthenticationService {
     private static final String CHANGE_PASS_HEADER = "ChangePassword";
@@ -54,20 +54,24 @@ public class AuthenticationService {
 //    }
 
     public String addChangePasswordToken(HttpServletRequest request, HttpServletResponse response, String username) {
-        log.info("Смена пароля пользователем {} IP адрес: {}", username, getRemoteIp(request));
+//        log.info("Смена пароля пользователем {} IP адрес: {}", username, getRemoteIp(request));
+        System.out.printf("Смена пароля пользователем %s IP адрес: %s%n", username, getRemoteIp(request));
         String token = TokenUtils.generateChangePasswordToken(username);
         changePasswordService.add(token);
         response.addHeader(CHANGE_PASS_HEADER, token);
-        log.info("Для пользователя {} был создан токен {} для смены пароля", username, token);
+//        log.info("Для пользователя {} был создан токен {} для смены пароля", username, token);
+        System.out.printf("Для пользователя %s был создан токен %s для смены пароля%n", username, token);
         return token;
     }
 
     public String addTwoFactorToken(HttpServletRequest request, HttpServletResponse response, User user) {
-        log.info("Добавление токена для второго фактора авторизации {} IP адрес: {}", user.getUsername(), getRemoteIp(request));
+//        log.info("Добавление токена для второго фактора авторизации {} IP адрес: {}", user.getUsername(), getRemoteIp(request));
+        System.out.printf("Добавление токена для второго фактора авторизации %s IP адрес: %s%n", user.getUsername(), getRemoteIp(request));
         String token = TokenUtils.generateTwoFactorToken(user.getUsername());
         twoFactorAuthService.add(user, token);
         response.addHeader(TWO_FACTOR_AUTH_HEADER, token);
-        log.info("Для пользователя {} был создан токен {} для второго фактора авторизации", user.getUsername(), token);
+//        log.info("Для пользователя {} был создан токен {} для второго фактора авторизации", user.getUsername(), token);
+        System.out.printf("Для пользователя %s был создан токен %s для второго фактора авторизации%n", user.getUsername(), token);
         return token;
     }
 
@@ -79,7 +83,8 @@ public class AuthenticationService {
                 ? AuthenticationSystem.ESIA
                 : AuthenticationSystem.UNIGATE;
         String[] links = getUserMenuLinks(user);
-        log.info("Добавление авторизации {} IP адрес: {}", user.getUsername(), remoteIp);
+//        log.info("Добавление авторизации {} IP адрес: {}", user.getUsername(), remoteIp);
+        System.out.printf("Добавление авторизации %s IP адрес: %s%n", user.getUsername(), remoteIp);
 
         String token;
         if (request.getParameter(WebConstants.TOKEN_PARAMETER) != null) {
@@ -88,7 +93,8 @@ public class AuthenticationService {
             token = addAuthenticationByUser(request, user, true, remoteIp, authenticationSystem);
         }
         ServletUtils.setToken(response, token);
-        log.info("Пользователь {} авторизовался", user.getUsername());
+//        log.info("Пользователь {} авторизовался", user.getUsername());
+        System.out.printf("Пользователь %s авторизовался%n", user.getUsername());
 
         String redirectUrl = JWTLoginFilter.getRedirectUrl(request, user, redirectUri, links, token, esiaServiceProperties.getUrl());
 
@@ -109,7 +115,8 @@ public class AuthenticationService {
     ) {
         String token = TokenUtils.generateAuthorizationToken(user.getUsername());
         sessionService.addSession(request, token, user, remoteIp, authenticationSystem);
-        log.info("Пользователь {} авторизовался и получил токен {}", user.getUsername(), token);
+//        log.info("Пользователь {} авторизовался и получил токен {}", user.getUsername(), token);
+        System.out.printf("Пользователь %s авторизовался и получил токен %s%n", user.getUsername(), token);
         if (writeLog) {
             messageService.sendUserProtocolEvent(user.getUsername(), LOGIN_EVENT, remoteIp);
         }
@@ -122,10 +129,12 @@ public class AuthenticationService {
         String username = TokenUtils.getAuthorizationUsername(token);
         if (StringUtils.isNotEmpty(role)) {
             sessionService.changeSessionRole(token, role);
-            log.info("Пользователь {} авторизовался с ролью {} и обновил токен {}", username, role, token);
+//            log.info("Пользователь {} авторизовался с ролью {} и обновил токен {}", username, role, token);
+            System.out.printf("Пользователь %s авторизовался с ролью %s и обновил токен %s%n", username, role, token);
         } else {
             sessionService.update(token);
-            log.info("Пользователь {} авторизовался и получил токен {}", username, token);
+//            log.info("Пользователь {} авторизовался и получил токен {}", username, token);
+            System.out.printf("Пользователь %s авторизовался и получил токен %s%n", username, token);
         }
         if (writeLog) {
             messageService.sendUserProtocolEvent(username, LOGIN_EVENT, remoteIp);

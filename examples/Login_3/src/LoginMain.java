@@ -1,6 +1,10 @@
 package src;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.spi.LoggerContext;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.ProviderManager;
@@ -20,6 +24,7 @@ import java.util.*;
 public class LoginMain
 {
     private static final String LOGIN_URL = "/login";
+    public static SystemCredentials systemCredentials = null;
 
     public static void main(final String[] args) {
         System.out.println("Current args:" + Arrays.toString(args));
@@ -57,10 +62,9 @@ public class LoginMain
                     settingsAccessControlService
             );
             MessageService messageService = new MessageServiceImpl();
-//            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-            MessageServiceImpl.setbCryptPasswordEncoder(bCryptPasswordEncoder);
+            MessageServiceImpl.setPasswordEncoder(passwordEncoder);
 
             ChangePasswordService changePasswordService = new DefaultChangePasswordService();
             TwoFactorAuthService twoFactorAuthService = new DefaultTwoFactorAuthService(
@@ -95,7 +99,7 @@ public class LoginMain
                     allowRedirectUrls
 
             );
-            unigateAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder);
+            unigateAuthenticationProvider.setPasswordEncoder(passwordEncoder);
             unigateAuthenticationProvider.setUserDetailsService(securityUserDetailsManager);
 
             ProviderManager providerManager = new ProviderManager(Collections.singletonList(unigateAuthenticationProvider));
@@ -109,7 +113,7 @@ public class LoginMain
                     allowRedirectUrls
             );
 
-            SystemCredentials systemCredentials = parseJson(path, SystemCredentials.class);
+            systemCredentials = parseJson(path, SystemCredentials.class);
 
             ServletRequest request = new CustomHttpServletRequest(
                     systemCredentials.getUsername(),
@@ -543,7 +547,7 @@ public class LoginMain
     static class CustomHttpServletResponse implements HttpServletResponse {
         private final StringWriter stringWriter = new StringWriter();
         private PrintWriter writer = new PrintWriter(stringWriter);
-        private int status;
+        private int status = 200;
 
         @Override
         public String getCharacterEncoding() {

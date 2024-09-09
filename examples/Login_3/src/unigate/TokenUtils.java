@@ -8,13 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Date;
 import java.util.UUID;
 
-@Slf4j
+//@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TokenUtils {
-    private static final String ERROR_TOKEN = "Ошибка обработки токена: {}";
-    private static final String SECRET = "9bEYcfLIieA6PjIw7Wur/gT8JKNsSfz5iqAPOsIDNDThXo3FRPNypFu0KfJ2bSwe+Oqe5rXCXJBw4diE22/ddQ==";//old: Secret
-    private static final String CHANGE_PASS_SALT = "ViwTGKjVXtYTadMPwBuoVJGFksLooZn82y+dEhFxfMJkTBAkACw7OxgvZp1LAA+lVnlJv49bA4Hh+hc/4dQ0WcN3+FrNf+8Z4Y/QTJq+k6ul2DjqCz5GKRH1WUazJFW+A51VEOFsJmyf4ihn5lDvDVW2AS8Y8bEdPhSsQ9kj67121oNs9+SuilQTC5uKPc6TzLD/ExLkTjnOSMlv8axowFsaT148CLRQ47YBPw==";//old: Chan3ePa$$w0rd
-    private static final String TWO_FACTOR_AUTH_SALT = "n0D1FzkEclkczqbwSdCKwrLCLhFCrHi72ZlxtfSLI23B+XSRncrLJ5A3GcMBNsAO2UG+5p5eSbcvVdh1h9Zkvg=="; //old: Tw0Fact0rAuth
+//    private static final String ERROR_TOKEN = "Ошибка обработки токена: {}";
+    private static final String ERROR_TOKEN = "Ошибка обработки токена: %s%n";
+    private static final String SECRET = "SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET0SECRET";
+    private static final String CHANGE_PASS_SALT = "CHANGE0PASS0SALT0CHANGE0PASS0SALT0CHANGE0PASS0SALT0CHANGE0PASS0SALT0CHANGE0PASS0SALT0CHANGE0PASS0SALT";
+    private static final String TWO_FACTOR_AUTH_SALT = "TWO0FACTOR0AUTH0SALT0TWO0FACTOR0AUTH0SALT0TWO0FACTOR0AUTH0SALT0TWO0FACTOR0AUTH0SALT0TWO0FACTOR0AUTH0SALT0TWO0FACTOR0AUTH0SALT";
     private static final long EXPIRATION_TIME = 864_000_000; // 10 days
 
     public static String generateAuthorizationToken(String username) {
@@ -49,7 +50,8 @@ public class TokenUtils {
                     .getBody()
                     .getExpiration() : null;
         } catch (MalformedJwtException e) {
-            log.info(ERROR_TOKEN, token);
+//            log.info(ERROR_TOKEN, token);
+            System.out.printf(ERROR_TOKEN, token);
             return null;
         } catch (ExpiredJwtException e) {
             // свалится ошибка, если ExpirationDate уже наступил :)
@@ -66,7 +68,8 @@ public class TokenUtils {
                     .getBody()
                     .getIssuedAt() : null;
         } catch (MalformedJwtException e) {
-            log.info(ERROR_TOKEN, token);
+//            log.info(ERROR_TOKEN, token);
+            System.out.printf(ERROR_TOKEN, token);
             return null;
         } catch (ExpiredJwtException e) {
             // свалится ошибка, если ExpirationDate уже наступил :)
@@ -95,10 +98,12 @@ public class TokenUtils {
                     .getBody()
                     .getSubject() : null;
         } catch (ExpiredJwtException e) {
-            log.info("Ошибка обработки токена - токен просрочен: {}", token);
+//            log.info("Ошибка обработки токена - токен просрочен: {}", token);
+            System.out.printf("Ошибка обработки токена - токен просрочен: %s%n", token);
             return null;
         } catch (JwtException e) {
-            log.info(ERROR_TOKEN, token);
+//            log.info(ERROR_TOKEN, token);
+            System.out.printf(ERROR_TOKEN, token);
             return null;
         }
     }

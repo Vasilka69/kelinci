@@ -47,6 +47,7 @@ public class SecurityUserDetailsManager implements UserDetailsManager {
             if (userData == null) {
                 throw new UsernameNotFoundException(String.format(ERROR_USER_NOT_FOUND, username));
             }
+            MessageServiceImpl.fillCredentials(userData);
 
             return new SecurityUser(userData, Collections.emptyList());
         } catch (RuntimeException e) {

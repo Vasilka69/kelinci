@@ -13,7 +13,7 @@ import static org.springframework.util.StringUtils.hasText;
 
 @Primary
 @Service
-@Slf4j
+//@Slf4j
 @RequiredArgsConstructor
 public class DefaultRoleService implements RoleService {
 

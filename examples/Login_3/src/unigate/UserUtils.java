@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Slf4j
+//@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserUtils {
     private static final String CHARACTER_PART = "A-Za-z";
@@ -313,7 +313,8 @@ public class UserUtils {
             passwordMaxDate = passwordMaxDate.plusHours(Long.parseLong(time[1]));
             passwordMaxDate = passwordMaxDate.plusMinutes(Long.parseLong(time[2]));
         } else {
-            log.error("Недопустимый формат для `Максимальный срок действия`");
+//            log.error("Недопустимый формат для `Максимальный срок действия`");
+            System.out.printf("Недопустимый формат для `Максимальный срок действия`%n");
         }
         return passwordMaxDate;
     }

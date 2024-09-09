@@ -1,13 +1,16 @@
 package src.unigate;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import src.LoginMain;
 
 import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.UUID;
 
@@ -27,10 +30,10 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
 //    @Value("${spring.rabbitmq.queue.proxy:}")
 //    private String proxyQueue;
 
-    private static BCryptPasswordEncoder bCryptPasswordEncoder;
+    private static PasswordEncoder passwordEncoder;
 
-    public static void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        MessageServiceImpl.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    public static void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        MessageServiceImpl.passwordEncoder = passwordEncoder;
     }
 
     //    @Value("${spring.rabbitmq.exchange.protocol:}")
@@ -90,36 +93,40 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
     }
 
     public static User findFirstByUsernameIgnoreCase(String username) {
-        String password = bCryptPasswordEncoder.encode(username);
-//        String password = username;
+        String password = encodePassword(username);
         if (new Random().nextBoolean()) {
-            return IndividualPerson.builder()
-                    .id(username)
-                    .username(username)
-                    .password(password)
-                    .accountNonLocked(true)
-                    .changePassword(false)
-                    .deleteDate(null)
-                    .createDate(Date.from(Instant.now()))
-                    .sessionMaxCount(999)
-                    .changePasswordDate(ZonedDateTime.now().plusYears(5))
-                    .blockReason(null)
-                    .blockComment("")
-                    .lastModified(ZonedDateTime.now())
-                    .lastAuthDate(ZonedDateTime.now())
-                    .firstName(username)
-                    .lastName(username)
-                    .patronymic(username)
-                    .post(username)
-                    .email(username)
-                    .phone("81234567890")
-                    .photo(UUID.randomUUID())
-                    .validTo(LocalDate.now().plusYears(5))
-                    .snils(username)
-                    .lastSessionRoleId(username)
-                    .build();
+            IndividualPerson individualPerson = IndividualPerson.builder()
+                .id(username)
+                .username(username)
+                .password(password)
+                .accountNonLocked(true)
+                .changePassword(false)
+                .deleteDate(null)
+                .createDate(Date.from(Instant.now()))
+                .sessionMaxCount(999)
+                .changePasswordDate(ZonedDateTime.now().plusYears(5))
+                .blockReason(null)
+                .blockComment("")
+                .lastModified(ZonedDateTime.now())
+                .lastAuthDate(ZonedDateTime.now())
+                .firstName(username)
+                .lastName(username)
+                .patronymic(username)
+                .post(username)
+                .email(username)
+                .phone("81234567890")
+                .photo(UUID.randomUUID())
+                .validTo(LocalDate.now().plusYears(5))
+                .snils(username)
+                .lastSessionRoleId(username)
+                .build();
+
+            individualPerson.setRoles(new HashSet<>());
+            individualPerson.setPermissions(new ArrayList<>());
+
+            return individualPerson;
         } else {
-            return new SysUser(
+            SysUser sysUser = new SysUser(
                     username,
                     username,
                     password,
@@ -127,7 +134,36 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
                     "",
                     username
             );
+
+            sysUser.setId(username);
+            sysUser.setUsername(username);
+            sysUser.setPassword(password);
+            sysUser.setAccountNonLocked(true);
+            sysUser.setChangePassword(false);
+            sysUser.setDeleteDate(null);
+            sysUser.setCreateDate(Date.from(Instant.now()));
+            sysUser.setSessionMaxCount(999);
+            sysUser.setChangePasswordDate(ZonedDateTime.now().plusYears(5));
+            sysUser.setBlockReason(null);
+            sysUser.setBlockComment("");
+            sysUser.setLastModified(ZonedDateTime.now());
+            sysUser.setLastAuthDate(ZonedDateTime.now());
+
+            sysUser.setRoles(new HashSet<>());
+            sysUser.setPermissions(new ArrayList<>());
+
+            return sysUser;
         }
+    }
+
+    private static String encodePassword(String password) {
+        return passwordEncoder.encode(password);
+    }
+
+    public static User fillCredentials(User user) {
+        user.setUsername(LoginMain.systemCredentials.getUsername());
+        user.setPassword(encodePassword(LoginMain.systemCredentials.getPassword()));
+        return user;
     }
 
 //    @Override

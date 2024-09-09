@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
+//@Slf4j
 public class DefaultTwoFactorAuthService implements TwoFactorAuthService {
 
 //    private final SettingsAccessControlService settingsAccessControlService;

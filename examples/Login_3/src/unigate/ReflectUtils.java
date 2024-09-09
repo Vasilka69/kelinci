@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@Slf4j
+//@Slf4j
 public class ReflectUtils {
 
     /**
@@ -34,7 +34,8 @@ public class ReflectUtils {
                             && !"class".equals(pd.getName()))
                     .collect(Collectors.toMap(PropertyDescriptor::getName, PropertyDescriptor::getReadMethod));
         } catch (IntrospectionException e) {
-            log.warn("Ошибка при получении геттеров класса {}: {}", clz.getName(), e.getMessage());
+//            log.warn("Ошибка при получении геттеров класса {}: {}", clz.getName(), e.getMessage());
+            System.out.printf("Ошибка при получении геттеров класса %s: %s%n", clz.getName(), e.getMessage());
             return Collections.emptyMap();
         }
     }
