@@ -52,7 +52,7 @@ public class MailServiceImpl implements MailService {
                 }
             }
 //            javaMailSender.send(mail);
-            System.out.printf("Письмо %s отправлено", mail);
+            System.out.printf("Письмо %s отправлено%n", mail);
         } catch (MessagingException | MailException ex) {
             throw new RuntimeException(ex.getMessage());
         } finally {

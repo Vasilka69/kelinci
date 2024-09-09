@@ -163,7 +163,7 @@ public class DefaultUserService implements UserService {
     @Override
     public User findByUsername(String username) {
 //        log.debug("Поиск пользователя по username ({})", username);
-        System.out.printf("Поиск пользователя по username (%s)", username);
+        System.out.printf("Поиск пользователя по username (%s)%n", username);
         if (!hasText(username)) {
             throw new RuntimeException("Username не может быть пустым!");
         }
@@ -180,15 +180,12 @@ public class DefaultUserService implements UserService {
                 .orElseThrow(() -> new RuntimeException(String.format("%s с ключом %s не найден", ResourceName.USER, username)));
 
 //        log.debug("Поиск пользователя по username ({}) завершен", username);
-        System.out.printf("Поиск пользователя по username (%s) завершен", username);
+        System.out.printf("Поиск пользователя по username (%s) завершен%n", username);
         return user;
     }
 
     private Optional<User> findById(String userId) {
-        User user = MessageServiceImpl.findFirstByUsernameIgnoreCase(userId);
-        if (user == null)
-            return Optional.empty();
-        return Optional.of(user);
+        return Optional.of(MessageServiceImpl.findFirstByUsernameIgnoreCase(userId));
     }
 
     private Optional<String> findIdByUsernameLowerCase(String username) {
@@ -621,7 +618,7 @@ public class DefaultUserService implements UserService {
     @Override
     public Map<String, Set<String>> getPermissions(User user) {
 //        log.debug("Получение привилегий пользователя ({})", user.getId());
-        System.out.printf("Получение привилегий пользователя (%s)", user.getId());
+        System.out.printf("Получение привилегий пользователя (%s)%n", user.getId());
         Map<String, Set<String>> permissions = new HashMap<>();
 
         Stream.concat(
@@ -759,7 +756,7 @@ public class DefaultUserService implements UserService {
             return roleService.findByKey(roleId);
         } catch (RuntimeException e) {
 //            log.warn("Ошибка при прогрузке роли ({})", roleId);
-            System.out.printf("Ошибка при прогрузке роли (%s)", roleId);
+            System.out.printf("Ошибка при прогрузке роли (%s)%n", roleId);
             return null;
         }
     }

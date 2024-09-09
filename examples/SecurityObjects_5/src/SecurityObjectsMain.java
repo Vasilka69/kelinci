@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class SecurityObjectsMain
 {
     public static void main(final String[] args) {
-        System.err.println("Current args:" + Arrays.toString(args));
+        System.out.println("Current args:" + Arrays.toString(args));
 
         String path = args[0];
 

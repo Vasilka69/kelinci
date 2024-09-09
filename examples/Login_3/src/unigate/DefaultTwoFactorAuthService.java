@@ -24,7 +24,7 @@ public class DefaultTwoFactorAuthService implements TwoFactorAuthService {
     @Override
     public void add(User user, String token) {
 //        twoFactorAuthTokenRepository.add(token);
-        System.out.printf("Токен %s записан в БД", token);
+        System.out.printf("Токен %s записан в БД%n", token);
         userMailService.sendTwoFactorCode(user);
     }
 

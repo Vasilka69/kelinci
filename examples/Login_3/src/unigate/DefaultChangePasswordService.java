@@ -12,7 +12,7 @@ public class DefaultChangePasswordService implements ChangePasswordService {
     @Override
     public void add(String token) {
 //        changePasswordTokenRepository.add(token);
-        System.out.printf("Токен %s записан в БД", token);
+        System.out.printf("Токен %s записан в БД%n", token);
     }
 
 //    @Override

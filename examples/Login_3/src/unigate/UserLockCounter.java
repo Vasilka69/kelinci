@@ -72,7 +72,7 @@ public class UserLockCounter {
     }
 
     private void save(User user) {
-        System.out.printf("Пользователь %s сохранен в БД", user);
+        System.out.printf("Пользователь %s сохранен в БД%n", user);
     }
 
 }

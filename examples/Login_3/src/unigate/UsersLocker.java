@@ -9,7 +9,7 @@ import java.util.concurrent.locks.Lock;
 public class UsersLocker {
 
 //    @Autowired
-    private EntityLocker<String> entityLocker;
+    private EntityLocker<String> entityLocker = new EntityLockerImpl<>();
 
 //    @Autowired
 //    private UserRepository userRepository;

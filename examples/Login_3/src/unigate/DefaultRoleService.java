@@ -91,7 +91,7 @@ public class DefaultRoleService implements RoleService {
     @Override
     public Role findByKey(String key) {
 //        log.trace("Получение информации о роли ({})", key);
-        System.out.printf("Получение информации о роли (%s)", key);
+        System.out.printf("Получение информации о роли (%s)%n", key);
         Role role;
         try {
             if (!hasText(key)) {
@@ -106,7 +106,7 @@ public class DefaultRoleService implements RoleService {
             throw exception;
         }
 //        log.trace("Информация о роли ({}) получена", key);
-        System.out.printf("Информация о роли (%s) получена", key);
+        System.out.printf("Информация о роли (%s) получена%n", key);
         return role;
     }
 

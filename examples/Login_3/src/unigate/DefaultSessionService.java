@@ -130,10 +130,10 @@ public class DefaultSessionService implements SessionService {
         session.setUserAuthorizedSystem(authenticationSystem);
 
 //        sessionRepository.save(session);
-        System.out.printf("Сессия %s сохранена в БД", session);
+        System.out.printf("Сессия %s сохранена в БД%n", session);
 
 //        userRepository.updateLastAuthDateById(jdbcTemplate, session.getActiveDate(), user.getId());
-        System.out.printf("Время последнего захода пользователя с id = %s изменено на %s", user.getId(), session.getActiveDate());
+        System.out.printf("Время последнего захода пользователя с id = %s изменено на %s%n", user.getId(), session.getActiveDate());
 
         return session;
     }
@@ -144,13 +144,13 @@ public class DefaultSessionService implements SessionService {
         Session session = findByToken(token);
         session.setActiveDate(ZonedDateTime.now());
 //        sessionRepository.save(session);
-        System.out.printf("Сессия %s сохранена в БД", session);
+        System.out.printf("Сессия %s сохранена в БД%n", session);
 
         if (session.getUsername() != null) {
             Optional<String> idByUsername = findIdByUsernameLowerCase(session.getUsername().toLowerCase());
 //            idByUsername.ifPresent(s -> userRepository.updateLastAuthDateById(jdbcTemplate, session.getActiveDate(), s));
             idByUsername.ifPresent(s ->
-                    System.out.printf("Время последнего захода пользователя с id = %s изменено на %s", s, session.getActiveDate()));
+                    System.out.printf("Время последнего захода пользователя с id = %s изменено на %s%n", s, session.getActiveDate()));
         }
     }
 

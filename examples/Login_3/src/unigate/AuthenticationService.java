@@ -20,7 +20,7 @@ public class AuthenticationService {
     private static final String CHANGE_PASS_HEADER = "ChangePassword";
     public static final String TWO_FACTOR_AUTH_HEADER = "TwoFactorAuth";
 
-//    private SecurityUserDetailsManager securityUserDetailsManager;
+    private SecurityUserDetailsManager securityUserDetailsManager;
     private SessionService sessionService;
     private MessageService messageService;
     private ChangePasswordService changePasswordService;

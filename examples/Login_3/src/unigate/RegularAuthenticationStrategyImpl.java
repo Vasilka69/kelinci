@@ -25,7 +25,7 @@ public class RegularAuthenticationStrategyImpl implements AuthenticationStrategy
             );
         }
 
-        System.out.printf("Попытка авторизации username %s IP %s", credentials.getUsername(), ServletUtils.getClientIP(request));
+        System.out.printf("Попытка авторизации username %s IP %s%n", credentials.getUsername(), ServletUtils.getClientIP(request));
 
         return new UnigateAuthenticationToken(
                 credentials.getUsername(),

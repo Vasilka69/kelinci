@@ -1,6 +1,7 @@
 package src.unigate;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -26,7 +27,13 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
 //    @Value("${spring.rabbitmq.queue.proxy:}")
 //    private String proxyQueue;
 
-//    @Value("${spring.rabbitmq.exchange.protocol:}")
+    private static BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public static void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        MessageServiceImpl.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+    //    @Value("${spring.rabbitmq.exchange.protocol:}")
     private String protocolExchange = "";
 //    @Value("${spring.rabbitmq.exchange.proxy:proxy-exchange}")
     private String proxyExchange = "proxy-exchange";
@@ -74,12 +81,22 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
         this.sendProtocolEvent(new ProtocolEvent(eventCode, user.getId(), username, remoteIp));
     }
 
+    public static User findNullableFirstByUsernameIgnoreCase(String username) {
+        if (new Random().nextBoolean()) {
+            return findFirstByUsernameIgnoreCase(username);
+        } else {
+            return null;
+        }
+    }
+
     public static User findFirstByUsernameIgnoreCase(String username) {
+        String password = bCryptPasswordEncoder.encode(username);
+//        String password = username;
         if (new Random().nextBoolean()) {
             return IndividualPerson.builder()
                     .id(username)
                     .username(username)
-                    .password(username)
+                    .password(password)
                     .accountNonLocked(true)
                     .changePassword(false)
                     .deleteDate(null)
@@ -101,17 +118,15 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
                     .snils(username)
                     .lastSessionRoleId(username)
                     .build();
-        } else if (new Random().nextBoolean()) {
+        } else {
             return new SysUser(
                     username,
                     username,
-                    username,
+                    password,
                     true,
                     "",
                     username
             );
-        } else {
-            return null;
         }
     }
 
@@ -142,14 +157,14 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
 //    }
 
     private void sendProtocolEvent(ProtocolEvent protocolEvent) {
-        System.out.printf("Сообщение %s отправлено", protocolEvent);
+        System.out.printf("Сообщение %s отправлено%n", protocolEvent);
 //        rabbitTemplate.setExchange(protocolExchange);
 //        rabbitTemplate.convertAndSend(protocolQueue, ObjectUtils.toJson(protocolEvent));
     }
 
     private void sendProxyEvent(String type, String id) {
         ProxyExchangeEvent event = new ProxyExchangeEvent(type, id);
-        System.out.printf("Сообщение %s отправлено", event);
+        System.out.printf("Сообщение %s отправлено%n", event);
 //        rabbitTemplate.setExchange(proxyExchange);
 //        rabbitTemplate.convertAndSend(proxyQueue, ObjectUtils.toJson(event));
     }
