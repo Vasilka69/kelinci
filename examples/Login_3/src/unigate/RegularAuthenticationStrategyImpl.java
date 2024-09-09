@@ -2,13 +2,12 @@ package src.unigate;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import src.unigate.strategy.impl.AuthenticationStrategy;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Collections;
 
-public class RegularAuthenticationStrategyImpl implements AuthenticationStrategy {
+public class RegularAuthenticationStrategyImpl implements IAuthenticationStrategy {
 
     @Override
     public UsernamePasswordAuthenticationToken authenticate(HttpServletRequest request, String[] allowRedirectUrls) throws IOException {
