@@ -29,9 +29,7 @@ public class LoginMain
     public static void main(final String[] args) {
         System.out.println("Current args:" + Arrays.toString(args));
 
-//        String path = args[0];
-        // todo убрать
-        String path = "D:\\Работа\\Тесты\\Fuzzing\\Отчеты\\Github\\kelinci\\examples\\Login_3\\in_dir\\login_1.json";
+        String path = args[0];
 
         try {
             JavaMailSender javaMailSender = new JavaMailSenderImpl();
