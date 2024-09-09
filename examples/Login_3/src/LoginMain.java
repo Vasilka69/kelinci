@@ -117,13 +117,10 @@ public class LoginMain
                     systemCredentials.getUsername(),
                     systemCredentials.getPassword()
             );
-            // HeaderWriterRequest
-            CustomHttpServletResponse response = new CustomHttpServletResponse();
-            // HeaderWriterResponse
-            FilterChain chain = (request1, response1) -> {
 
-            };
-            // VirtualFilterChain
+            CustomHttpServletResponse response = new CustomHttpServletResponse();
+
+            FilterChain chain = (request1, response1) -> {  };
 
             jwtLoginFilter.doFilter(request, response, chain);
 
