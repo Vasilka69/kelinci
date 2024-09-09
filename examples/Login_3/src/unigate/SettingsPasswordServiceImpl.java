@@ -25,12 +25,12 @@ public class SettingsPasswordServiceImpl extends AbstractSettingsService<Setting
 //    private final UsersLastPasswordRepository usersLastPasswordRepository;
 //
 //    private final MessageService messageService;
-//
-//    @Override
-//    public SettingPassword getPasswordAttemptsBeforeLock() {
-//        return get("attempts_before_lock");
-//    }
-//
+
+    @Override
+    public SettingPassword getPasswordAttemptsBeforeLock() {
+        return get("attempts_before_lock");
+    }
+
 //    @Override
 //    public SettingPassword getPasswordMinTime() {
 //        return get("min_time");
@@ -131,6 +131,14 @@ public class SettingsPasswordServiceImpl extends AbstractSettingsService<Setting
                         ),
                         new SettingPassword(
                                 "user_session_max_count",
+                                null,
+                                false,
+                                99999,
+                                99999,
+                                "99999"
+                        ),
+                        new SettingPassword(
+                                "attempts_before_lock",
                                 null,
                                 false,
                                 99999,

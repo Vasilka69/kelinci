@@ -3,6 +3,7 @@ package src.unigate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -158,25 +159,46 @@ public class DefaultUserService implements UserService {
 //        log.debug("Результат проверки наличия пользователя ({}) = {}", key, exists);
 //        return exists;
 //    }
-//
-//    @Override
-//    public User findByUsername(String username) {
+
+    @Override
+    public User findByUsername(String username) {
 //        log.debug("Поиск пользователя по username ({})", username);
-//        if (!hasText(username)) {
-//            throw new ResourceIllegalArgumentException("Username не может быть пустым!");
-//        }
-//
-//        // для данного запроса включён query cache
+        System.out.printf("Поиск пользователя по username (%s)", username);
+        if (!hasText(username)) {
+            throw new RuntimeException("Username не может быть пустым!");
+        }
+
+        // для данного запроса включён query cache
 //        String userId = userRepository.findIdByUsernameLowerCase(username.toLowerCase())
-//                .orElseThrow(() -> new ResourceNotFoundException(ResourceName.USER, username));
-//
+        String userId = findIdByUsernameLowerCase(username.toLowerCase())
+//                .orElseThrow(() -> new RuntimeException(ResourceName.USER, username));
+                .orElseThrow(() -> new RuntimeException(String.format("%s с ключом %s не найден", ResourceName.USER, username)));
+
 //        User user = userRepository.findById(userId)
+        User user = findById(userId)
 //                .orElseThrow(() -> new ResourceNotFoundException(ResourceName.USER, username));
-//
+                .orElseThrow(() -> new RuntimeException(String.format("%s с ключом %s не найден", ResourceName.USER, username)));
+
 //        log.debug("Поиск пользователя по username ({}) завершен", username);
-//        return user;
-//    }
-//
+        System.out.printf("Поиск пользователя по username (%s) завершен", username);
+        return user;
+    }
+
+    private Optional<User> findById(String userId) {
+        User user = MessageServiceImpl.findFirstByUsernameIgnoreCase(userId);
+        if (user == null)
+            return Optional.empty();
+        return Optional.of(user);
+    }
+
+    private Optional<String> findIdByUsernameLowerCase(String username) {
+        return Optional.of(username);
+    }
+
+    public static boolean hasText(String str) {
+        return str != null && !str.isEmpty();
+    }
+
 //    @Override
 //    public UsernameAvailability checkUsernameExists(String username) {
 //        if (userRepository.existsByUsernameIgnoreCase(username)) {

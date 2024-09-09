@@ -141,10 +141,10 @@ public interface SessionService {
 //     * @return          Список наличия ролей
 //     */
 //    List<Boolean> hasRoles(String token, List<String> roleIds);
-//
-//    /**
-//     * @param username  Логин пользователя
-//     * @return          Количество сессий пользователя
-//     */
-//    long getUserSessionCount(String username);
+
+    /**
+     * @param username  Логин пользователя
+     * @return          Количество сессий пользователя
+     */
+    long getUserSessionCount(String username);
 }

@@ -13,14 +13,14 @@ public interface UserService extends BaseProtocolableService<User, String> {
 //    void beforeUpdate(User user);
 //
 //    User addSysUser(SysUser user);
-//
-//    /**
-//     * Получение пользователя по username
-//     *
-//     * @return Найденный пользователь
-//     */
-//    User findByUsername(String username);
-//
+
+    /**
+     * Получение пользователя по username
+     *
+     * @return Найденный пользователь
+     */
+    User findByUsername(String username);
+
 //    UsernameAvailability checkUsernameExists(String username);
 //
 //    /**

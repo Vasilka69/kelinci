@@ -30,7 +30,7 @@ public class DefaultSessionService implements SessionService {
     private final SettingsAccessControlService settingsAccessControlService;
 //    private final RoleService roleService;
 //    private final MessageService messageService;
-    private final EsiaServiceProperties esiaServiceProperties;
+//    private final EsiaServiceProperties esiaServiceProperties;
 
 //    @Override
 //    public RegResponse<SessionExportInfo> getSessionExportInfoByFilter(SessionFilter filter) {
@@ -302,7 +302,7 @@ public class DefaultSessionService implements SessionService {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, token);
         HttpEntity entity = new HttpEntity<>(headers);
-        String getRolesUrl = String.format("%s/auth/esia/roles", esiaServiceProperties.getUrl());
+//        String getRolesUrl = String.format("%s/auth/esia/roles", esiaServiceProperties.getUrl());
 //        return HttpClient
 //                .sendGetRequest(entity, getRolesUrl,new ParameterizedTypeReference<List<SessionRoleInfo>>() {})
 //                .getBody();
@@ -326,7 +326,7 @@ public class DefaultSessionService implements SessionService {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, token);
         HttpEntity entity = new HttpEntity<>(Collections.emptyList(), headers);
-        String getRolesUrl = String.format("%s/auth/esia/roles", esiaServiceProperties.getUrl());
+//        String getRolesUrl = String.format("%s/auth/esia/roles", esiaServiceProperties.getUrl());
 //        HttpClient.sendPostRequest(entity, getRolesUrl, List.class).getBody();
 //        individualPersonRepository.updateLastSessionRoleIdBySnils(jdbcTemplate, session.getUsername(), role.getRoleId());
     }

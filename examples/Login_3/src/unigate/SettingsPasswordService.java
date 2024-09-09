@@ -5,7 +5,7 @@ package src.unigate;
  */
 public interface SettingsPasswordService extends SettingsService<SettingPassword> {
 
-//    SettingPassword getPasswordAttemptsBeforeLock();
+    SettingPassword getPasswordAttemptsBeforeLock();
 //
 //    SettingPassword getPasswordMinTime();
 

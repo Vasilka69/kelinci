@@ -30,19 +30,19 @@ public class RedirectUrlUtils {
 
         return Stream.of(allowRedirectUrls).anyMatch(allowRedirectUrl -> isSameUrl(redirectUri, allowRedirectUrl, false));
     }
-//
-//    public static boolean isAllowUserRedirectUrl(String redirectUri, String[] allowRedirectUrls) {
-//        if (ArrayUtils.isEmpty(allowRedirectUrls)) {
-//            return false;
-//        }
-//
-//        if (StringUtils.isEmpty(redirectUri)) {
-//            return true;
-//        }
-//
-//        return Stream.of(allowRedirectUrls).anyMatch(allowRedirectUrl -> isSameUrl(redirectUri, allowRedirectUrl, true));
-//    }
-//
+
+    public static boolean isAllowUserRedirectUrl(String redirectUri, String[] allowRedirectUrls) {
+        if (ArrayUtils.isEmpty(allowRedirectUrls)) {
+            return false;
+        }
+
+        if (StringUtils.isEmpty(redirectUri)) {
+            return true;
+        }
+
+        return Stream.of(allowRedirectUrls).anyMatch(allowRedirectUrl -> isSameUrl(redirectUri, allowRedirectUrl, true));
+    }
+
     private static boolean isSameUrl(String first, String second, boolean checkPath) {
         if (StringUtils.isEmpty(first) || StringUtils.isEmpty(second)) {
             return false;

@@ -74,7 +74,7 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
         this.sendProtocolEvent(new ProtocolEvent(eventCode, user.getId(), username, remoteIp));
     }
 
-    private User findFirstByUsernameIgnoreCase(String username) {
+    public static User findFirstByUsernameIgnoreCase(String username) {
         if (new Random().nextBoolean()) {
             return IndividualPerson.builder()
                     .id(username)
@@ -101,7 +101,7 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
                     .snils(username)
                     .lastSessionRoleId(username)
                     .build();
-        } else {
+        } else if (new Random().nextBoolean()) {
             return new SysUser(
                     username,
                     username,
@@ -110,6 +110,8 @@ public class MessageServiceImpl implements MessageService, ProxyMessageService {
                     "",
                     username
             );
+        } else {
+            return null;
         }
     }
 

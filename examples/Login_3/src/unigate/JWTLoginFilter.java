@@ -14,15 +14,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.jackson2.CoreJackson2Module;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.util.CollectionUtils;
-import src.unigate.*;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Objects;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
@@ -38,7 +35,8 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                           SettingsPasswordService settingsPasswordService,
                           SettingsAccessControlService settingsAccessControlService,
 //                          EsiaServiceProperties esiaServiceProperties,
-                          String[] allowRedirectUrls) {
+                          String[] allowRedirectUrls
+    ) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);
         this.authenticationService = authenticationService;

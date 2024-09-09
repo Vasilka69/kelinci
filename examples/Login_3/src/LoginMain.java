@@ -2,6 +2,10 @@ package src;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.catalina.connector.Request;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.authentication.ProviderManager;
+import org.thymeleaf.TemplateEngine;
 import src.unigate.*;
 
 import javax.servlet.*;
@@ -23,9 +27,76 @@ public class LoginMain
         String path = args[0];
 
         try {
-            
+            JavaMailSender javaMailSender = new JavaMailSenderImpl();
 
-            JWTLoginFilter jwtLoginFilter = new JWTLoginFilter();
+            TwoFactorAuthCodeService twoFactorAuthCodeService = new TwoFactorAuthCodeService();
+            MailService mailService = new MailServiceImpl(
+                    javaMailSender
+            );
+            TemplateEngine templateEngine = new TemplateEngine();
+            UserMailService userMailService = new UserMailServiceImpl(
+                    twoFactorAuthCodeService,
+                    mailService,
+                    templateEngine
+            );
+
+            UsersLocker usersLocker = new UsersLocker();
+            RoleService roleService = new DefaultRoleService();
+            SecurityObjectService securityObjectService = new DefaultSecurityObjectService();
+            UserService userService = new DefaultUserService(
+                    roleService,
+                    securityObjectService
+            );
+            SettingsAccessControlService settingsAccessControlService = new SettingsAccessControlServiceImpl();
+            SettingsPasswordService settingsPasswordService = new SettingsPasswordServiceImpl();
+
+            SessionService sessionService = new DefaultSessionService(
+                    settingsAccessControlService
+            );
+            MessageService messageService = new MessageServiceImpl();
+            ChangePasswordService changePasswordService = new DefaultChangePasswordService();
+            TwoFactorAuthService twoFactorAuthService = new DefaultTwoFactorAuthService(
+                    userMailService
+            );
+            EsiaServiceProperties esiaServiceProperties = new EsiaServiceProperties();
+            MenuService menuService = new MenuServiceImpl(
+                    userService
+            );
+
+            AuthenticationService authenticationService = new AuthenticationService(
+                    sessionService,
+                    messageService,
+                    changePasswordService,
+                    twoFactorAuthService,
+                    esiaServiceProperties,
+                    menuService
+            );
+
+            String[] allowRedirectUrls = new String[0];
+
+            UnigateAuthenticationProvider unigateAuthenticationProvider = new UnigateAuthenticationProvider(
+                    usersLocker,
+                    sessionService,
+                    userService,
+                    roleService,
+                    settingsAccessControlService,
+                    settingsPasswordService,
+                    authenticationService,
+                    allowRedirectUrls
+
+            );
+
+            ProviderManager providerManager = new ProviderManager(Collections.singletonList(unigateAuthenticationProvider));
+
+            final String LOGIN_URL = "/login";
+            JWTLoginFilter jwtLoginFilter = new JWTLoginFilter(
+                    LOGIN_URL,
+                    providerManager,
+                    authenticationService,
+                    settingsPasswordService,
+                    settingsAccessControlService,
+                    allowRedirectUrls
+            );
 
             SystemCredentials systemCredentials = parseJson(path, SystemCredentials.class);
 
